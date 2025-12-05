@@ -1,0 +1,43 @@
+html{
+    font-size: 80%;
+    background-color: #1A1C2C;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; 
+    color: #2C3E50;
+}
+
+#itunesWindow {
+    width: 500px;
+    height: 300px;
+    background: #f2f2f2;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+}
+
+#titleBar {
+    background: #e0e0e0;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    position: relative;
+    border-radius: 10px;
+}
+
+#windowTitle {
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin: 0;
+}
+
+#contentArea {
+    padding: 15px;
+}
+
+#contentArea h3{
+    margin-top: 3em;
+}
+
+

@@ -5,6 +5,7 @@ body {
     max-width: 390px;
     margin: 0 auto;    
     overflow: hidden;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; 
 }
 
 .set-titles-font {
@@ -89,7 +90,6 @@ body {
     --color-9: #9BA1BB;
 }
 
-
 .text-area{
     margin-top: 10px;
     padding: 5px;
@@ -98,14 +98,13 @@ body {
     background-color:#1A1C2C;
     color:white;
     text-align:right;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; 
+    
     font-size:45px;
 }
 
 .calc-container {
     width: 320px;
     margin: auto;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .display {
@@ -120,7 +119,6 @@ body {
     border-radius: 10px;
     overflow: hidden;
 }
-
 
 .calc {
     display: grid;

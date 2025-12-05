@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link
+                rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=SF+Pro+Display:wght@300;400;500;600&display=swap"
+            rel="stylesheet"
+        />
+
+        <title>Nova Music</title>
+        <link rel="stylesheet" href="music_styles.css">
+    </head>
+    <body>
+        <div id="itunesWindow">
+            <div id="titleBar">
+
+                <div id="contentArea">
+                    <h3>Music Library</h3>
+                    <p>Your songs will appear here...</p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            let windowBox = document.getElementById("itunesWindow");
+            let titleBar = document.getElementById("titleBar");
+
+            let moving = false;
+            let offsetX = 0;
+            let offsetY = 0;
+
+            titleBar.addEventListener("mousedown", function(event) {
+                moving = true;
+                offsetX = event.clientX - windowBox.offsetLeft;
+                offsetY = event.clientY - windowBox.offsetTop;
+            });
+
+            document.addEventListener("mouseup", function() {
+                moving = false;
+            });
+
+            document.addEventListener("mousemove", function(event) {
+                if (moving === true) {
+                    windowBox.style.position = "absolute";
+                    windowBox.style.left = (event.clientX - offsetX) + "px";
+                    windowBox.style.top = (event.clientY - offsetY) + "px";
+                }
+            });
+
+        </script>
+    
+    </body>
+</html>
