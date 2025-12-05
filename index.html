@@ -54,6 +54,140 @@
           </span>
         </div>
       </div>
+
+      <!-- Ventana de aplicaciones -->
+      <div class="app-window-container" id="app-window-container">
+        <div class="window-controls">
+          <div class="control-btn close"></div>
+          <div class="control-btn minimize"></div>
+          <div class="control-btn maximize"></div>
+          <span class="window-title" id="window-title"
+            >Bienvenido a WebOS Nova</span
+          >
+        </div>
+        <iframe
+          name="ventana-app"
+          id="ventana-app"
+          class="app-window"
+          src="apps/bienvenida.html"
+          title="Ventana de aplicación"
+        >
+        </iframe>
+      </div>
+
+      <!-- Dock (barra de aplicaciones) -->
+      <div class="dock-container">
+        <div class="dock" id="dock">
+          <!-- Separador izquierdo -->
+          <div class="dock-separator"></div>
+          <!-- Ícono Finder para restaurar ventana -->
+          <a
+            class="dock-item finder hidden"
+            onclick="restoreWindow()"
+            id="finder-icon"
+          >
+            <div class="dock-icon">
+              <i class="fas fa-window-restore"></i>
+            </div>
+            <span class="dock-tooltip">Restaurar ventana</span>
+          </a>
+
+          <!-- Aplicaciones en el dock -->
+          <a
+            class="dock-item"
+            onclick="abrirApp('apps/calculadora.html', 'Calculadora')"
+          >
+            <div class="dock-icon">
+              <i class="fas fa-calculator"></i>
+            </div>
+            <span class="dock-tooltip">Calculadora</span>
+          </a>
+
+          <a
+            class="dock-item"
+            onclick="abrirApp('apps/notas.html', 'Bloc de Notas')"
+          >
+            <div class="dock-icon">
+              <i class="fas fa-sticky-note"></i>
+            </div>
+            <span class="dock-tooltip">Notas</span>
+          </a>
+
+          <a
+            class="dock-item"
+            onclick="abrirApp('apps/galeria.html', 'Galería de Fotos')"
+          >
+            <div class="dock-icon">
+              <i class="fas fa-images"></i>
+            </div>
+            <span class="dock-tooltip">Galería</span>
+          </a>
+
+          <a
+            class="dock-item"
+            onclick="abrirApp('apps/musica.html', 'Reproductor de Música')"
+          >
+            <div class="dock-icon">
+              <i class="fas fa-music"></i>
+            </div>
+            <span class="dock-tooltip">Música</span>
+          </a>
+
+          <a
+            class="dock-item"
+            onclick="abrirApp('apps/navegador.html', 'Navegador Web')"
+          >
+            <div class="dock-icon">
+              <i class="fas fa-globe"></i>
+            </div>
+            <span class="dock-tooltip">Navegador</span>
+          </a>
+
+          <a class="dock-item" onclick="abrirApp('apps/juego.html', 'Juegos')">
+            <div class="dock-icon">
+              <i class="fas fa-gamepad"></i>
+            </div>
+            <span class="dock-tooltip">Juegos</span>
+          </a>
+
+          <a
+            class="dock-item"
+            onclick="abrirApp('apps/configuracion.html', 'Configuración')"
+          >
+            <div class="dock-icon">
+              <i class="fas fa-cog"></i>
+            </div>
+            <span class="dock-tooltip">Configuración</span>
+          </a>
+
+          <!-- Separador derecho -->
+          <div class="dock-separator"></div>
+
+          <!-- Papelera -->
+          <div class="dock-item trash" id="trash-bin">
+            <div class="dock-icon">
+              <i class="fas fa-trash"></i>
+            </div>
+            <span class="dock-tooltip">Papelera</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notificaciones -->
+      <div class="notification-area" id="notification-area">
+        <div class="notification" id="welcome-notification">
+          <i class="fas fa-rocket"></i>
+          <span>WebOS Nova iniciado correctamente</span>
+          <button
+            class="notification-close"
+            onclick="cerrarNotificacion('welcome-notification')"
+          >
+            ×
+          </button>
+        </div>
+      </div>
+
+      </div>
     </div>
 
     <!-- Script principal -->
