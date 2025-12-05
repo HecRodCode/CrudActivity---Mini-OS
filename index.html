@@ -16,9 +16,9 @@
     <link rel="icon" href="assets/media/apple-logo.svg" type="image/svg+xml" />
   </head>
   <body>
-    <!-- Escritorio -->
+    <!-- Escritorio principal -->
     <div class="desktop" id="desktop">
-      <!-- Barra de menú superior -->
+      <!-- Barra de menú superior (menu-bar) -->
       <div class="menu-bar">
         <div class="menu-left">
           <div class="apple-menu">
@@ -55,6 +55,180 @@
         </div>
       </div>
 
+      <!-- Panel de configuración rápida (Control Center) -->
+      <div class="quick-settings-panel hidden" id="quick-settings">
+        <div class="quick-settings-header">
+          <h3>Control Center</h3>
+          <button class="quick-settings-close" onclick="toggleQuickSettings()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <div class="quick-controls-grid">
+          <!-- Columna izquierda: Conectividad -->
+          <div class="controls-column">
+            <div class="connectivity-group">
+              <div class="connectivity-header">
+                <h4>Conectividad</h4>
+              </div>
+
+              <!-- Wi-Fi -->
+              <div class="connectivity-item" onclick="toggleWifi()">
+                <div class="connectivity-icon">
+                  <i class="fas fa-wifi"></i>
+                </div>
+                <div class="connectivity-info">
+                  <span class="connectivity-label">Wi-Fi</span>
+                  <span class="connectivity-status" id="wifi-status"
+                    >Rimi Coders</span
+                  >
+                </div>
+                <div class="connectivity-toggle">
+                  <div class="toggle-switch active" id="wifi-switch">
+                    <div class="toggle-knob"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bluetooth -->
+              <div class="connectivity-item" onclick="toggleBluetooth()">
+                <div class="connectivity-icon">
+                  <i class="fas fa-bluetooth"></i>
+                </div>
+                <div class="connectivity-info">
+                  <span class="connectivity-label">Bluetooth</span>
+                  <span class="connectivity-status" id="bluetooth-status"
+                    >On</span
+                  >
+                </div>
+                <div class="connectivity-toggle">
+                  <div class="toggle-switch active" id="bluetooth-switch">
+                    <div class="toggle-knob"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- AirDrop -->
+              <div class="connectivity-item" onclick="toggleAirdrop()">
+                <div class="connectivity-icon">
+                  <i class="fas fa-share-alt"></i>
+                </div>
+                <div class="connectivity-info">
+                  <span class="connectivity-label">AirDrop</span>
+                  <span class="connectivity-status" id="airdrop-status"
+                    >Contacts Only</span
+                  >
+                </div>
+                <div class="connectivity-toggle">
+                  <div class="toggle-switch active" id="airdrop-switch">
+                    <div class="toggle-knob"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna derecha: Modos y pantalla -->
+          <div class="controls-column">
+            <!-- Focus -->
+            <div class="control-card focus-card" onclick="toggleFocus()">
+              <div class="control-icon">
+                <i class="fas fa-moon"></i>
+              </div>
+              <div class="control-info">
+                <h4>Focus</h4>
+                <p class="control-status" id="focus-status">Off</p>
+              </div>
+            </div>
+
+            <!-- Stage Manager -->
+            <div class="control-card stage-card" onclick="toggleStageManager()">
+              <div class="control-icon">
+                <i class="fas fa-layer-group"></i>
+              </div>
+              <div class="control-info">
+                <h4>Stage Manager</h4>
+                <p class="control-status" id="stage-status">Off</p>
+              </div>
+            </div>
+
+            <!-- Screen Mirroring -->
+            <div
+              class="control-card screen-card"
+              onclick="toggleScreenMirroring()"
+            >
+              <div class="control-icon">
+                <i class="fas fa-desktop"></i>
+              </div>
+              <div class="control-info">
+                <h4>Screen Mirroring</h4>
+                <p class="control-status" id="mirror-status">Off</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controles de hardware -->
+        <div class="hardware-controls">
+          <!-- Brillo de pantalla -->
+          <div class="hardware-slider">
+            <div class="slider-header">
+              <i class="fas fa-sun"></i>
+              <span>Display</span>
+            </div>
+            <div class="slider-container">
+              <input
+                type="range"
+                class="hardware-range"
+                id="display-brightness"
+                min="10"
+                max="100"
+                value="75"
+              />
+              <div class="slider-value" id="brightness-value">75%</div>
+            </div>
+          </div>
+
+          <!-- Volumen -->
+          <div class="hardware-slider">
+            <div class="slider-header">
+              <i class="fas fa-volume-up"></i>
+              <span>Sound</span>
+            </div>
+            <div class="slider-container">
+              <input
+                type="range"
+                class="hardware-range"
+                id="volume-control"
+                min="0"
+                max="100"
+                value="65"
+              />
+              <div class="slider-value" id="volume-value">65%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reproductor de música -->
+        <div class="music-player" onclick="openMusicApp()">
+          <div class="music-album">
+            <i class="fas fa-music"></i>
+          </div>
+          <div class="music-info">
+            <h4>The Edge Of Glory</h4>
+            <p class="music-artist">Lady Gaga – Born This Way</p>
+          </div>
+          <div class="music-controls">
+            <button
+              class="music-btn"
+              onclick="event.stopPropagation(); togglePlay()"
+            >
+              <i class="fas fa-play" id="play-icon"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
       <!-- Ventana de aplicaciones -->
       <div class="app-window-container" id="app-window-container">
         <div class="window-controls">
@@ -75,12 +249,10 @@
         </iframe>
       </div>
 
-      <!-- Dock (barra de aplicaciones) -->
+      <!-- Dock de aplicaciones -->
       <div class="dock-container">
         <div class="dock" id="dock">
-          <!-- Separador izquierdo -->
           <div class="dock-separator"></div>
-          <!-- Ícono Finder para restaurar ventana -->
           <a
             class="dock-item finder hidden"
             onclick="restoreWindow()"
@@ -92,7 +264,7 @@
             <span class="dock-tooltip">Restaurar ventana</span>
           </a>
 
-          <!-- Aplicaciones en el dock -->
+          <!-- Aplicaciones del dock -->
           <a
             class="dock-item"
             onclick="abrirApp('apps/calculadora.html', 'Calculadora')"
@@ -160,7 +332,6 @@
             <span class="dock-tooltip">Configuración</span>
           </a>
 
-          <!-- Separador derecho -->
           <div class="dock-separator"></div>
 
           <!-- Papelera -->
@@ -173,7 +344,7 @@
         </div>
       </div>
 
-      <!-- Notificaciones -->
+      <!-- Área de notificaciones -->
       <div class="notification-area" id="notification-area">
         <div class="notification" id="welcome-notification">
           <i class="fas fa-rocket"></i>
@@ -188,7 +359,7 @@
       </div>
     </div>
 
-    <!-- Script principal -->
+    <!-- Scripts principales -->
     <script src="script.js"></script>
   </body>
 </html>

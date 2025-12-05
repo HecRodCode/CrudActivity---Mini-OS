@@ -1,8 +1,13 @@
+/* Clase principal del sistema operativo WebOS Nova */
 class WebOSNova {
   constructor() {
     this.init();
+    this.quickSettingsVisible = false;
+    this.musicPlaying = false;
+    this.initQuickSettings();
   }
 
+  /* Inicialización del sistema */
   init() {
     this.initTime();
     this.initDock();
@@ -11,10 +16,10 @@ class WebOSNova {
     this.showWelcomeNotification();
   }
 
-  // Actualizar hora y fecha
+  /* Sistema de hora y fecha */
   initTime() {
     this.updateTime();
-    setInterval(() => this.updateTime(), 60000); // Actualizar cada minuto
+    setInterval(() => this.updateTime(), 60000);
   }
 
   updateTime() {
@@ -29,14 +34,13 @@ class WebOSNova {
     document.getElementById("current-date").textContent = dateStr;
   }
 
-  // Inicializar efectos del dock
+  /* Sistema del Dock de aplicaciones */
   initDock() {
     const dockItems = document.querySelectorAll(".dock-item");
     const dock = document.getElementById("dock");
 
     dockItems.forEach((item) => {
       item.addEventListener("mouseenter", (e) => {
-        // Efecto de onda en el dock
         const rect = dock.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const wave = document.createElement("div");
@@ -49,7 +53,7 @@ class WebOSNova {
       });
     });
 
-    // Efecto de papelera
+    /* Funcionalidad de la Papelera */
     const trashBin = document.getElementById("trash-bin");
     trashBin.addEventListener("click", () => {
       this.showNotification("Papelera vacía", "info");
@@ -65,7 +69,7 @@ class WebOSNova {
     });
   }
 
-  // Inicializar sistema de notificaciones
+  /* Sistema de notificaciones */
   initNotifications() {
     this.notificationArea = document.getElementById("notification-area");
   }
@@ -88,7 +92,6 @@ class WebOSNova {
 
     this.notificationArea.appendChild(notification);
 
-    // Auto-eliminar
     setTimeout(() => {
       if (notification.parentElement) {
         notification.remove();
@@ -106,9 +109,9 @@ class WebOSNova {
     return icons[type] || "info-circle";
   }
 
-  // Inicializar event listeners
+  /* Event Listeners del sistema */
   initEventListeners() {
-    // Controles de ventana
+    /* Controles de ventana (cerrar, minimizar, maximizar) */
     document
       .querySelector(".control-btn.close")
       .addEventListener("click", () => {
@@ -127,14 +130,14 @@ class WebOSNova {
         this.toggleMaximizeAppWindow();
       });
 
-    // Menú de Apple
+    /* Menú de Apple */
     document.querySelector(".apple-menu").addEventListener("click", (e) => {
       if (e.target.classList.contains("menu-item")) {
         this.handleAppleMenu(e.target.textContent);
       }
     });
 
-    // Teclas rápidas
+    /* Atajos de teclado */
     document.addEventListener("keydown", (e) => {
       if (e.ctrlKey && e.key === "q") {
         this.showNotification("Saliendo de WebOS Nova...", "info");
@@ -145,18 +148,16 @@ class WebOSNova {
     });
   }
 
-  // Funciones para manejar ventanas
+  /* Gestión de ventanas de aplicaciones */
   closeAppWindow() {
     const iframe = document.getElementById("ventana-app");
     const container = document.querySelector(".app-window-container");
     const finderIcon = document.getElementById("finder-icon");
 
-    // 1. Ocultar el icono del Finder (si está visible)
     if (finderIcon) {
       finderIcon.classList.add("hidden");
     }
 
-    // 2. Ocultar la ventana con animación
     iframe.style.opacity = "0";
     container.style.transform = "translateX(-50%) scale(0.95)";
     container.style.opacity = "0";
@@ -173,21 +174,18 @@ class WebOSNova {
     const finderIcon = document.getElementById("finder-icon");
     const windowTitle = document.getElementById("window-title").textContent;
 
-    // Guardar el estado actual para restaurar
     this.lastAppState = {
       url: iframe.src,
       title: windowTitle,
       visible: true,
     };
 
-    // Minimizar con animación
     container.style.transform = "translateX(-50%) translateY(100vh)";
     container.style.opacity = "0";
 
     setTimeout(() => {
       container.style.display = "none";
 
-      // MOSTRAR el icono del Finder
       if (finderIcon) {
         finderIcon.classList.remove("hidden");
         finderIcon.querySelector(
@@ -218,6 +216,7 @@ class WebOSNova {
     }
   }
 
+  /* Manejo del menú Apple */
   handleAppleMenu(option) {
     switch (option) {
       case "Acerca de WebOS Nova":
@@ -288,21 +287,218 @@ class WebOSNova {
   updateWindowTitle(title) {
     document.getElementById("window-title").textContent = title;
   }
+
+  /* Panel de Configuración Rápida (Control Center) */
+  initQuickSettings() {
+    const timeElement = document.getElementById("current-time");
+    const dateElement = document.getElementById("current-date");
+    const timeDateContainer = timeElement.parentElement;
+
+    timeDateContainer.addEventListener("click", (e) => {
+      if (
+        e.target === timeElement ||
+        e.target === dateElement ||
+        e.target.closest(".status-item")
+      ) {
+        this.toggleQuickSettings();
+      }
+    });
+
+    this.setupQuickSettingsControls();
+
+    document.addEventListener("click", (e) => {
+      const panel = document.getElementById("quick-settings");
+      const isClickInside = panel.contains(e.target);
+      const isTimeDateClick = timeDateContainer.contains(e.target);
+
+      if (!isClickInside && !isTimeDateClick && this.quickSettingsVisible) {
+        this.hideQuickSettings();
+      }
+    });
+
+    this.updateTime();
+  }
+
+  toggleQuickSettings() {
+    if (this.quickSettingsVisible) {
+      this.hideQuickSettings();
+    } else {
+      this.showQuickSettings();
+    }
+  }
+
+  showQuickSettings() {
+    const panel = document.getElementById("quick-settings");
+    panel.classList.remove("hidden");
+    panel.style.animation = "fadeInUp 0.3s ease";
+    this.quickSettingsVisible = true;
+  }
+
+  hideQuickSettings() {
+    const panel = document.getElementById("quick-settings");
+    panel.style.animation = "none";
+    setTimeout(() => {
+      panel.classList.add("hidden");
+    }, 50);
+    this.quickSettingsVisible = false;
+  }
+
+  setupQuickSettingsControls() {
+    /* Control de brillo de pantalla */
+    const brightnessSlider = document.getElementById("display-brightness");
+    const brightnessValue = document.getElementById("brightness-value");
+
+    brightnessSlider.addEventListener("input", (e) => {
+      const value = e.target.value;
+      brightnessValue.textContent = `${value}%`;
+      document.body.style.filter = `brightness(${value}%)`;
+    });
+
+    /* Control de volumen */
+    const volumeSlider = document.getElementById("volume-control");
+    const volumeValue = document.getElementById("volume-value");
+
+    volumeSlider.addEventListener("input", (e) => {
+      const value = e.target.value;
+      volumeValue.textContent = `${value}%`;
+      const volumeIcon = document.querySelector(".fa-volume-up");
+      if (volumeIcon) {
+        volumeIcon.className =
+          value == 0
+            ? "fas fa-volume-mute"
+            : value < 50
+            ? "fas fa-volume-down"
+            : "fas fa-volume-up";
+      }
+    });
+  }
+
+  /* Funciones de toggle para conectividad */
+  toggleWifi() {
+    const wifiSwitch = document.getElementById("wifi-switch");
+    const wifiStatus = document.getElementById("wifi-status");
+    const isActive = wifiSwitch.classList.toggle("active");
+
+    if (isActive) {
+      wifiStatus.textContent = "Rimi Coders";
+      this.showNotification("Wi-Fi conectado a Rimi Coders", "success");
+    } else {
+      wifiStatus.textContent = "Off";
+      this.showNotification("Wi-Fi desactivado", "warning");
+    }
+  }
+
+  /* Bluetooth */
+  toggleBluetooth() {
+    const bluetoothStatus = document.getElementById("bluetooth-status");
+    const bluetoothSwitch = document.getElementById("bluetooth-switch");
+    const isOn = bluetoothStatus.textContent === "On";
+
+    if (isOn) {
+      bluetoothStatus.textContent = "Off";
+      bluetoothSwitch.classList.remove("active");
+      this.showNotification("Bluetooth desactivado", "warning");
+    } else {
+      bluetoothStatus.textContent = "On";
+      bluetoothSwitch.classList.add("active");
+      this.showNotification("Bluetooth activado", "success");
+    }
+  }
+
+  toggleAirdrop() {
+    const airdropStatus = document.getElementById("airdrop-status");
+    const airdropSwitch = document.getElementById("airdrop-switch");
+    const current = airdropStatus.textContent;
+
+    if (current === "Contacts Only") {
+      airdropStatus.textContent = "Everyone";
+      airdropSwitch.classList.add("active");
+      this.showNotification("AirDrop configurado para Todos", "info");
+    } else if (current === "Everyone") {
+      airdropStatus.textContent = "Off";
+      airdropSwitch.classList.remove("active");
+      this.showNotification("AirDrop desactivado", "warning");
+    } else {
+      airdropStatus.textContent = "Contacts Only";
+      airdropSwitch.classList.add("active");
+      this.showNotification("AirDrop configurado para Solo Contactos", "info");
+    }
+  }
+
+  /* Funciones de toggle para modos del sistema */
+  toggleFocus() {
+    const focusStatus = document.getElementById("focus-status");
+    const isOn = focusStatus.textContent === "On";
+
+    if (isOn) {
+      focusStatus.textContent = "Off";
+      this.showNotification("Focus desactivado", "info");
+    } else {
+      focusStatus.textContent = "On";
+      this.showNotification("Focus activado - No molestar", "success");
+    }
+  }
+
+  toggleStageManager() {
+    const stageStatus = document.getElementById("stage-status");
+    const isOn = stageStatus.textContent === "On";
+
+    if (isOn) {
+      stageStatus.textContent = "Off";
+      this.showNotification("Stage Manager desactivado", "info");
+    } else {
+      stageStatus.textContent = "On";
+      this.showNotification("Stage Manager activado", "success");
+    }
+  }
+
+  toggleScreenMirroring() {
+    const mirrorStatus = document.getElementById("mirror-status");
+    const isOn = mirrorStatus.textContent === "On";
+
+    if (isOn) {
+      mirrorStatus.textContent = "Off";
+      this.showNotification("Screen Mirroring desactivado", "info");
+    } else {
+      mirrorStatus.textContent = "On";
+      this.showNotification(
+        "Buscando dispositivos para Screen Mirroring...",
+        "info"
+      );
+    }
+  }
+
+  /* Control de música */
+  togglePlay() {
+    const playIcon = document.getElementById("play-icon");
+    this.musicPlaying = !this.musicPlaying;
+
+    if (this.musicPlaying) {
+      playIcon.className = "fas fa-pause";
+      this.showNotification("Reproduciendo: The Edge Of Glory", "success");
+    } else {
+      playIcon.className = "fas fa-play";
+      this.showNotification("Música en pausa", "info");
+    }
+  }
+
+  openMusicApp() {
+    abrirApp("apps/musica.html", "Reproductor de Música");
+    this.hideQuickSettings();
+  }
 }
 
-// Funciones globales para uso en HTML
+/* Función para abrir aplicaciones */
 function abrirApp(url, titulo) {
   const iframe = document.getElementById("ventana-app");
   const container = document.querySelector(".app-window-container");
   const finderIcon = document.getElementById("finder-icon");
 
-  // Obtener la URL actual del iframe
   const currentIframeSrc = iframe.src;
   const urlToCompare = url.startsWith("http")
     ? url
     : window.location.origin + "/" + url;
 
-  // Verificar si la misma app ya está abierta y visible
   const isSameApp =
     currentIframeSrc.includes(url) ||
     (url.includes(".html") && currentIframeSrc.includes(url.split("/").pop()));
@@ -310,41 +506,34 @@ function abrirApp(url, titulo) {
     container.style.display === "block" ||
     getComputedStyle(container).display === "block";
 
-  // Si la misma app ya está abierta y visible, minimizarla
   if (isSameApp && isWindowVisible) {
     webOS.minimizeAppWindow();
     webOS.showNotification(`"${titulo}" minimizada`, "info");
     return;
   }
 
-  // Si la ventana está minimizada (Finder visible) y es la misma app, restaurarla
   if (isSameApp && finderIcon && !finderIcon.classList.contains("hidden")) {
     restoreWindow();
     return;
   }
 
-  // Ocultar el icono del Finder (si está visible)
   if (finderIcon) {
     finderIcon.classList.add("hidden");
   }
 
-  // Mostrar ventana si está oculta
   if (
     container.style.display === "none" ||
     getComputedStyle(container).display === "none"
   ) {
     container.style.display = "block";
-    // Restablecer estilos para animación
     container.style.opacity = "0";
     container.style.transform = "translateX(-50%) scale(0.95)";
     container.style.transition = "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)";
   }
 
-  // Cambiar URL y título
   iframe.src = url;
   webOS.updateWindowTitle(titulo);
 
-  // Efecto de transición
   iframe.style.opacity = "0";
 
   setTimeout(() => {
@@ -353,10 +542,10 @@ function abrirApp(url, titulo) {
     container.style.transform = "translateX(-50%) scale(1)";
   }, 150);
 
-  // Notificación
   webOS.showNotification(`Aplicación "${titulo}" abierta`, "success");
 }
 
+/* Funciones de utilidad del sistema */
 function actualizarTitulo(titulo) {
   document.getElementById("window-title").textContent = titulo;
 }
@@ -370,7 +559,7 @@ function cerrarNotificacion(id) {
   }
 }
 
-// Función global para restaurar ventana
+/* Función para restaurar ventana minimizada */
 function restoreWindow() {
   const container = document.querySelector(".app-window-container");
   const finderIcon = document.getElementById("finder-icon");
@@ -388,7 +577,6 @@ function restoreWindow() {
       container.style.opacity = "1";
       container.style.transform = "translateX(-50%) scale(1)";
 
-      // OCULTAR el icono del Finder después de restaurar
       if (finderIcon) {
         finderIcon.classList.add("hidden");
       }
@@ -400,16 +588,54 @@ function restoreWindow() {
   }
 }
 
-// Inicializar WebOS Nova cuando el DOM esté listo
+/* Funciones globales para controles del sistema */
+function toggleQuickSettings() {
+  if (webOS) {
+    webOS.toggleQuickSettings();
+  }
+}
+
+function toggleWifi() {
+  if (webOS) webOS.toggleWifi();
+}
+
+/* Bluetooth */
+function toggleBluetooth() {
+  if (webOS) webOS.toggleBluetooth();
+}
+
+function toggleAirdrop() {
+  if (webOS) webOS.toggleAirdrop();
+}
+
+function toggleFocus() {
+  if (webOS) webOS.toggleFocus();
+}
+
+function toggleStageManager() {
+  if (webOS) webOS.toggleStageManager();
+}
+
+function toggleScreenMirroring() {
+  if (webOS) webOS.toggleScreenMirroring();
+}
+
+function togglePlay() {
+  if (webOS) webOS.togglePlay();
+}
+
+function openMusicApp() {
+  if (webOS) webOS.openMusicApp();
+}
+
+/* Inicialización del sistema */
 let webOS;
 document.addEventListener("DOMContentLoaded", () => {
   webOS = new WebOSNova();
 
-  // Efecto de carga inicial
   document.body.style.opacity = "0";
   setTimeout(() => {
     document.body.style.transition = "opacity 0.5s ease";
     document.body.style.opacity = "1";
   }, 100);
 });
-s;
