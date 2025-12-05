@@ -26,24 +26,117 @@
             <button class="grey_but">AC</button>
             <button class="grey_but">+/-</button>
             <button class="grey_but">%</button>
-            <button class="orange_but">DIV</button>
+            <button class="orange_but"><i class="fa-solid fa-divide"></i></button>
             <button class="dark_but">7</button>
             <button class="dark_but">8</button>
             <button class="dark_but">9</button>
-            <button class="orange_but">x</button>
+            <button class="orange_but"><i class="fa-solid fa-xmark"></i></button>
             <button class="dark_but">4</button>
             <button class="dark_but">5</button>
             <button class="dark_but">6</button>
-            <button class="orange_but">-</button>
+            <button class="orange_but"><i class="fa-solid fa-minus"></i></button>
             <button class="dark_but">1</button>
             <button class="dark_but">2</button>
             <button class="dark_but">3</button>
-            <button class="orange_but">+</button>
-            <button class="dark_but">OP</button>
+            <button class="orange_but"><i class="fa-solid fa-plus"></i></button>
+            <button class="dark_but"><i class="fa-solid fa-calculator"></i></button>
             <button class="dark_but">0</button>
             <button class="dark_but">,</button>
-            <button class="orange_but">=</button>
+            <button class="orange_but"><i class="fa-solid fa-equals"></i></button>
         </div>
+
+        <script>
+            const calc = document.querySelector(".calc");
+            let current = "";       
+            let previous = "";      
+            let operator = "";      
+
+            function updateDisplay() {
+                // Si tienes un display, lo actualizas aquí.
+                // Si no tienes display, te puedo ayudar a crearlo.
+                console.log(current || previous || "0");
+            }
+
+            function calculate() {
+                const num1 = parseFloat(previous);
+                const num2 = parseFloat(current);
+                if (isNaN(num1) || isNaN(num2)) return;
+
+                switch (operator) {
+                    case "+": previous = (num1 + num2).toString(); break;
+                    case "-": previous = (num1 - num2).toString(); break;
+                    case "x": previous = (num1 * num2).toString(); break;
+                    case "DIV": previous = (num1 / num2).toString(); break;
+                }
+            }
+
+            calc.addEventListener("click", (e) => {
+                if (e.target.tagName !== "BUTTON") return;
+                const value = e.target.textContent;
+
+                if (!isNaN(value)) {
+                    current += value;
+                    updateDisplay();
+                    return;
+                }
+
+                if (["+", "-", "x", "DIV"].includes(value)) {
+                    if (current === "") return;
+
+                    if (previous && operator) {
+                        calculate();
+                    } else {
+                        previous = current;
+                    }
+
+                    operator = value;
+                    current = "";
+                    updateDisplay();
+                    return;
+                }
+
+                if (value === "=") {
+                    if (!current || !operator) return;
+                    calculate();
+                    current = "";
+                    operator = "";
+                    updateDisplay();
+                    return;
+                }
+
+                if (value === "AC") {
+                    current = "";
+                    previous = "";
+                    operator = "";
+                    updateDisplay();
+                    return;
+                }
+
+                if (value === "+/-") {
+                    if (current) {
+                        current = (parseFloat(current) * -1).toString();
+                    } else if (previous) {
+                        previous = (parseFloat(previous) * -1).toString();
+                    }
+                    updateDisplay();
+                    return;
+                }
+
+                if (value === "%") {
+                    if (current) {
+                        current = (parseFloat(current) / 100).toString();
+                    }
+                    updateDisplay();
+                    return;
+                }
+
+                if (value === "," && !current.includes(".")) {
+                    current += ".";
+                    updateDisplay();
+                    return;
+                }
+            });
+        </script>
         
     </body>
 </html>
