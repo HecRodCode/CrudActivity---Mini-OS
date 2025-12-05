@@ -24,16 +24,25 @@ Incluye aplicaciones internas y una interfaz visual que simula un entorno de tra
 
 ## 📁 Estructura del proyecto
 
+- /Apps 
+    calculator.html
+    cal_styles.css
 
 ---
 
 ## 📦 Aplicaciones disponibles
 
-| Aplicación      | Archivo               | Descripción                   |
-|-----------------|------------------------|------------------------------|
-|                 |                        |                              |
-|                 |                        |                              |
-|                 |                        |                              |
-|                 |                        |                              |
-
----
+| Aplicación      | Archivo                | Funciones                              | Descripción                        |
+|-----------------|------------------------|--------------------------------------- |-------------------------------------
+|                 | /Apps-calculator.html  | -Suma, Resta, Multiplicación, División | Herramienta básica del sistema     |
+|   Calculadora   | /Apps-cal_styles.css   | -Permitir números decimales            | para realizar operaciones rápidas  |
+|                 |                        | -Borrar display                        | con una interfaz clara y práctica. |
+|-----------------|------------------------|----------------------------------------|------------------------------------|
+|
+|
+|
+|
+|
+|
+|
+|
