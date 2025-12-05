@@ -20,123 +20,164 @@
             <h2 class="set-subtitles-font">Calculator</h2>
         </header>
 
-        <textarea name="num" class="text-area">0</textarea>
-        <div class="calc">
-            
-            <button class="grey_but">AC</button>
-            <button class="grey_but">+/-</button>
-            <button class="grey_but">%</button>
-            <button class="orange_but"><i class="fa-solid fa-divide"></i></button>
-            <button class="dark_but">7</button>
-            <button class="dark_but">8</button>
-            <button class="dark_but">9</button>
-            <button class="orange_but"><i class="fa-solid fa-xmark"></i></button>
-            <button class="dark_but">4</button>
-            <button class="dark_but">5</button>
-            <button class="dark_but">6</button>
-            <button class="orange_but"><i class="fa-solid fa-minus"></i></button>
-            <button class="dark_but">1</button>
-            <button class="dark_but">2</button>
-            <button class="dark_but">3</button>
-            <button class="orange_but"><i class="fa-solid fa-plus"></i></button>
-            <button class="dark_but"><i class="fa-solid fa-calculator"></i></button>
-            <button class="dark_but">0</button>
-            <button class="dark_but">,</button>
-            <button class="orange_but"><i class="fa-solid fa-equals"></i></button>
-        </div>
+        <div class="calc-container">
 
-        <script>
-            const calc = document.querySelector(".calc");
-            let current = "";       
-            let previous = "";      
-            let operator = "";      
+    <div id="display" class="display">0</div>
 
-            function updateDisplay() {
-                // Si tienes un display, lo actualizas aquí.
-                // Si no tienes display, te puedo ayudar a crearlo.
-                console.log(current || previous || "0");
-            }
+    <div class="calc">
+        <button class="grey_but">AC</button>
+        <button class="grey_but">+/-</button>
+        <button class="grey_but">%</button>
+        <button class="orange_but op" data-op="DIV"><i class="fa-solid fa-divide"></i></button>
 
-            function calculate() {
-                const num1 = parseFloat(previous);
-                const num2 = parseFloat(current);
-                if (isNaN(num1) || isNaN(num2)) return;
+        <button class="dark_but">7</button>
+        <button class="dark_but">8</button>
+        <button class="dark_but">9</button>
+        <button class="orange_but op" data-op="x"><i class="fa-solid fa-xmark"></i></button>
 
-                switch (operator) {
-                    case "+": previous = (num1 + num2).toString(); break;
-                    case "-": previous = (num1 - num2).toString(); break;
-                    case "x": previous = (num1 * num2).toString(); break;
-                    case "DIV": previous = (num1 / num2).toString(); break;
-                }
-            }
+        <button class="dark_but">4</button>
+        <button class="dark_but">5</button>
+        <button class="dark_but">6</button>
+        <button class="orange_but op" data-op="-"><i class="fa-solid fa-minus"></i></button>
 
-            calc.addEventListener("click", (e) => {
-                if (e.target.tagName !== "BUTTON") return;
-                const value = e.target.textContent;
+        <button class="dark_but">1</button>
+        <button class="dark_but">2</button>
+        <button class="dark_but">3</button>
+        <button class="orange_but op" data-op="+"><i class="fa-solid fa-plus"></i></button>
 
-                if (!isNaN(value)) {
-                    current += value;
-                    updateDisplay();
-                    return;
-                }
+        <button class="dark_but"><i class="fa-solid fa-calculator"></i></button>
+        <button class="dark_but">0</button>
+        <button class="dark_but">,</button>
+        <button class="orange_but op" data-op="="><i class="fa-solid fa-equals"></i></button>
+    </div>
+</div>
 
-                if (["+", "-", "x", "DIV"].includes(value)) {
-                    if (current === "") return;
+<script>
+    const display = document.getElementById("display");
+    const calc = document.querySelector(".calc");
 
-                    if (previous && operator) {
-                        calculate();
-                    } else {
-                        previous = current;
-                    }
+    let current = "";
+    let previous = "";
+    let operator = "";
 
-                    operator = value;
-                    current = "";
-                    updateDisplay();
-                    return;
-                }
+    function updateDisplay(value) {
+        display.textContent = (value === "" ? "0" : String(value)).substring(0, 12);
+    }
 
-                if (value === "=") {
-                    if (!current || !operator) return;
-                    calculate();
-                    current = "";
-                    operator = "";
-                    updateDisplay();
-                    return;
-                }
+    function calculate() {
+        const num1 = parseFloat(previous);
+        const num2 = parseFloat(current);
+        if (isNaN(num1) || isNaN(num2)) return;
 
-                if (value === "AC") {
-                    current = "";
-                    previous = "";
-                    operator = "";
-                    updateDisplay();
-                    return;
-                }
+        switch (operator) {
+        case "+": previous = (num1 + num2).toString(); break;
+        case "-": previous = (num1 - num2).toString(); break;
+        case "x": previous = (num1 * num2).toString(); break;
+        case "DIV": previous = (num1 / num2).toString(); break;
+        }
+    }
 
-                if (value === "+/-") {
-                    if (current) {
-                        current = (parseFloat(current) * -1).toString();
-                    } else if (previous) {
-                        previous = (parseFloat(previous) * -1).toString();
-                    }
-                    updateDisplay();
-                    return;
-                }
+    calc.addEventListener("click", (e) => {
+        const btn = e.target.closest("button");
+        if (!btn) return;
 
-                if (value === "%") {
-                    if (current) {
-                        current = (parseFloat(current) / 100).toString();
-                    }
-                    updateDisplay();
-                    return;
-                }
+        const op = btn.dataset.op;               
+        const text = btn.textContent.trim();   
 
-                if (value === "," && !current.includes(".")) {
-                    current += ".";
-                    updateDisplay();
-                    return;
-                }
-            });
-        </script>
+        if (op) {
+        if (op === "=") {
+            if (!current || !operator) return;
+            calculate();
+            updateDisplay(previous);
+            current = "";
+            operator = "";
+            return;
+        }
+
+        if (current === "") return;
+
+        if (previous && operator) {
+            calculate();
+        } else {
+            previous = current;
+        }
+
+        operator = op;
+        current = "";
+        updateDisplay(previous);
+        return;
+        }
+
+        // ------------------------
+        // NÚMEROS (solo 0-9 explícitos)
+        // ------------------------
+        if (/^[0-9]$/.test(text)) {
+        // evita ceros a la izquierda innecesarios
+        if (current === "0") current = text;
+        else current += text;
+        updateDisplay(current);
+        return;
+        }
+
+        // ------------------------
+        // AC
+        // ------------------------
+        if (text === "AC") {
+        current = "";
+        previous = "";
+        operator = "";
+        updateDisplay("0");
+        return;
+        }
+
+        // ------------------------
+        // +/-
+        // ------------------------
+        if (text === "+/-") {
+        if (current) {
+            current = (parseFloat(current) * -1).toString();
+            updateDisplay(current);
+        } else if (previous) {
+            previous = (parseFloat(previous) * -1).toString();
+            updateDisplay(previous);
+        }
+        return;
+        }
+
+        // ------------------------
+        // %
+        // ------------------------
+        if (text === "%") {
+        if (current) {
+            current = (parseFloat(current) / 100).toString();
+            updateDisplay(current);
+        }
+        return;
+        }
+
+        // ------------------------
+        // COMA (,)
+        // ------------------------
+        if (text === "," && !current.includes(".")) {
+        // si no hay current, añadir "0."
+        if (current === "") current = "0.";
+        else current += ".";
+        updateDisplay(current);
+        return;
+        }
+
+        // ------------------------
+        // BOTÓN "OP" (ícono calculadora) - ejemplo: no hace nada por ahora
+        // ------------------------
+        if (btn.querySelector(".fa-calculator")) {
+        // aquí puedes añadir funcionalidad extra
+        // por ahora lo dejamos como placeholder
+        console.log("Botón OP presionado");
+        }
+    });
+    </script>
+
+
         
     </body>
 </html>

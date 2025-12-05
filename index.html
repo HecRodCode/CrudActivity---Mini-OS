@@ -1,1 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebOS Nova</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=SF+Pro+Display:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="assets/media/apple-logo.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <!-- Escritorio -->
+    <div class="desktop" id="desktop">
+      <!-- Barra de menú superior -->
+      <div class="menu-bar">
+        <div class="menu-left">
+          <div class="apple-menu">
+            <span class="apple-logo">
+              <i class="fab fa-apple"></i>
+            </span>
+            <div class="apple-menu-dropdown">
+              <div class="menu-item">Acerca de WebOS Nova</div>
+              <div class="menu-item">Preferencias del sistema...</div>
+              <div class="separator"></div>
+              <div class="menu-item">Salir</div>
+            </div>
+          </div>
+          <span class="app-menu">Finder</span>
+          <span class="app-menu">Archivo</span>
+          <span class="app-menu">Editar</span>
+          <span class="app-menu">Ver</span>
+          <span class="app-menu">Ir</span>
+          <span class="app-menu">Ventana</span>
+          <span class="app-menu">Ayuda</span>
+        </div>
+        <div class="menu-right">
+          <span class="status-item"><i class="fas fa-wifi"></i></span>
+          <span class="status-item"><i class="fas fa-volume-up"></i></span>
+          <span class="status-item"
+            ><i class="fas fa-battery-three-quarters"></i> 87%</span
+          >
+          <span class="status-item" id="current-time">--:--</span>
+          <span class="status-item" id="current-date">--- --</span>
+          <span class="user-item">
+            <i class="fas fa-user-circle"></i>
+            <span class="username">Usuario</span>
+          </span>
+        </div>
+      </div>
+    </div>
 
+    <!-- Script principal -->
+    <script src="script.js"></script>
+  </body>
+</html>
