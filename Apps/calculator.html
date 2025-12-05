@@ -20,164 +20,100 @@
             <h2 class="set-subtitles-font">Calculator</h2>
         </header>
 
-        <div class="calc-container">
+        <div class="calculator">
 
-    <div id="display" class="display">0</div>
+        <input id="display" type="text" disabled class="display">
 
-    <div class="calc">
-        <button class="grey_but">AC</button>
-        <button class="grey_but">+/-</button>
-        <button class="grey_but">%</button>
-        <button class="orange_but op" data-op="DIV"><i class="fa-solid fa-divide"></i></button>
+        <div class="calc">
+            <button class="grey_but" onclick="clearAll()">AC</button>
+            <button class="grey_but">+/-</button>
+            <button class="grey_but">%</button>
+            <button class="orange_but" onclick="chooseOperator('/')"><i class="fa-solid fa-divide"></i></button>
 
-        <button class="dark_but">7</button>
-        <button class="dark_but">8</button>
-        <button class="dark_but">9</button>
-        <button class="orange_but op" data-op="x"><i class="fa-solid fa-xmark"></i></button>
+            <button class="dark_but" onclick="addNumber('7')">7</button>
+            <button class="dark_but" onclick="addNumber('8')">8</button>
+            <button class="dark_but" onclick="addNumber('9')">9</button>
+            <button class="orange_but" onclick="chooseOperator('*')"><i class="fa-solid fa-xmark"></i></button>
 
-        <button class="dark_but">4</button>
-        <button class="dark_but">5</button>
-        <button class="dark_but">6</button>
-        <button class="orange_but op" data-op="-"><i class="fa-solid fa-minus"></i></button>
+            <button class="dark_but" onclick="addNumber('4')">4</button>
+            <button class="dark_but" onclick="addNumber('5')">5</button>
+            <button class="dark_but" onclick="addNumber('6')">6</button>
+            <button class="orange_but" onclick="chooseOperator('-')"><i class="fa-solid fa-minus"></i></button>
 
-        <button class="dark_but">1</button>
-        <button class="dark_but">2</button>
-        <button class="dark_but">3</button>
-        <button class="orange_but op" data-op="+"><i class="fa-solid fa-plus"></i></button>
+            <button class="dark_but" onclick="addNumber('1')">1</button>
+            <button class="dark_but" onclick="addNumber('2')">2</button>
+            <button class="dark_but" onclick="addNumber('3')">3</button>
+            <button class="orange_but" onclick="chooseOperator('+')"><i class="fa-solid fa-plus"></i></button>
 
-        <button class="dark_but"><i class="fa-solid fa-calculator"></i></button>
-        <button class="dark_but">0</button>
-        <button class="dark_but">,</button>
-        <button class="orange_but op" data-op="="><i class="fa-solid fa-equals"></i></button>
+            <button class="dark_but"><i class="fa-solid fa-calculator"></i></button>
+            <button class="dark_but" onclick="addNumber('0')">0</button>
+            <button class="dark_but">,</button>
+            <button class="orange_but" onclick="calculate()"><i class="fa-solid fa-equals"></i></button>
+        </div>
     </div>
-</div>
 
-<script>
-    const display = document.getElementById("display");
-    const calc = document.querySelector(".calc");
+    <script>
+    
+        let display = document.getElementById("display");
+        let currentNumber = "";
+        let previousNumber = "";
+        let operator = "";
 
-    let current = "";
-    let previous = "";
-    let operator = "";
 
-    function updateDisplay(value) {
-        display.textContent = (value === "" ? "0" : String(value)).substring(0, 12);
-    }
-
-    function calculate() {
-        const num1 = parseFloat(previous);
-        const num2 = parseFloat(current);
-        if (isNaN(num1) || isNaN(num2)) return;
-
-        switch (operator) {
-        case "+": previous = (num1 + num2).toString(); break;
-        case "-": previous = (num1 - num2).toString(); break;
-        case "x": previous = (num1 * num2).toString(); break;
-        case "DIV": previous = (num1 / num2).toString(); break;
+        function addNumber(num) {
+            currentNumber = currentNumber + num;
+            display.value = currentNumber;
         }
-    }
 
-    calc.addEventListener("click", (e) => {
-        const btn = e.target.closest("button");
-        if (!btn) return;
 
-        const op = btn.dataset.op;               
-        const text = btn.textContent.trim();   
+        function chooseOperator(op) {
+            if (currentNumber === "") {
+                return; 
+            }
+            operator = op;
+            previousNumber = currentNumber;
+            currentNumber = "";
+        }
 
-        if (op) {
-        if (op === "=") {
-            if (!current || !operator) return;
-            calculate();
-            updateDisplay(previous);
-            current = "";
+
+        function clearAll() {
+            currentNumber = "";
+            previousNumber = "";
             operator = "";
-            return;
+            display.value = "";
         }
 
-        if (current === "") return;
 
-        if (previous && operator) {
-            calculate();
-        } else {
-            previous = current;
-        }
+        function calculate() {
+            let result = 0;
 
-        operator = op;
-        current = "";
-        updateDisplay(previous);
-        return;
-        }
+            let n1 = parseFloat(previousNumber);
+            let n2 = parseFloat(currentNumber);
 
-        // ------------------------
-        // NÚMEROS (solo 0-9 explícitos)
-        // ------------------------
-        if (/^[0-9]$/.test(text)) {
-        // evita ceros a la izquierda innecesarios
-        if (current === "0") current = text;
-        else current += text;
-        updateDisplay(current);
-        return;
-        }
+            if (operator === "+") {
+                result = n1 + n2;
+            }
+            else if (operator === "-") {
+                result = n1 - n2;
+            }
+            else if (operator === "*") {
+                result = n1 * n2;
+            }
+            else if (operator === "/") {
+                if (n2 === 0) {
+                    display.value = "Error";
+                    return;
+                }
+                result = n1 / n2;
+            }
 
-        // ------------------------
-        // AC
-        // ------------------------
-        if (text === "AC") {
-        current = "";
-        previous = "";
-        operator = "";
-        updateDisplay("0");
-        return;
+            display.value = result;
+            currentNumber = String(result);
+            previousNumber = "";
+            operator = "";
         }
 
-        // ------------------------
-        // +/-
-        // ------------------------
-        if (text === "+/-") {
-        if (current) {
-            current = (parseFloat(current) * -1).toString();
-            updateDisplay(current);
-        } else if (previous) {
-            previous = (parseFloat(previous) * -1).toString();
-            updateDisplay(previous);
-        }
-        return;
-        }
-
-        // ------------------------
-        // %
-        // ------------------------
-        if (text === "%") {
-        if (current) {
-            current = (parseFloat(current) / 100).toString();
-            updateDisplay(current);
-        }
-        return;
-        }
-
-        // ------------------------
-        // COMA (,)
-        // ------------------------
-        if (text === "," && !current.includes(".")) {
-        // si no hay current, añadir "0."
-        if (current === "") current = "0.";
-        else current += ".";
-        updateDisplay(current);
-        return;
-        }
-
-        // ------------------------
-        // BOTÓN "OP" (ícono calculadora) - ejemplo: no hace nada por ahora
-        // ------------------------
-        if (btn.querySelector(".fa-calculator")) {
-        // aquí puedes añadir funcionalidad extra
-        // por ahora lo dejamos como placeholder
-        console.log("Botón OP presionado");
-        }
-    });
     </script>
 
-
-        
     </body>
 </html>
