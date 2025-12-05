@@ -47,7 +47,7 @@
 
             <button class="dark_but"><i class="fa-solid fa-calculator"></i></button>
             <button class="dark_but" onclick="addNumber('0')">0</button>
-            <button class="dark_but">,</button>
+            <button class="dark_but" onclick="floatNumber()">,</button>
             <button class="orange_but" onclick="calculate()"><i class="fa-solid fa-equals"></i></button>
         </div>
     </div>
@@ -59,12 +59,16 @@
         let previousNumber = "";
         let operator = "";
 
-
         function addNumber(num) {
             currentNumber = currentNumber + num;
             display.value = currentNumber;
         }
-
+        function floatNumber() {
+            if (currentNumber.indexOf(",") === -1) {
+                currentNumber = currentNumber + ",";
+                display.value = currentNumber;
+            }
+        }
 
         function chooseOperator(op) {
             if (currentNumber === "") {
@@ -75,7 +79,6 @@
             currentNumber = "";
         }
 
-
         function clearAll() {
             currentNumber = "";
             previousNumber = "";
@@ -83,12 +86,11 @@
             display.value = "";
         }
 
-
         function calculate() {
             let result = 0;
 
-            let n1 = parseFloat(previousNumber);
-            let n2 = parseFloat(currentNumber);
+            let n1 = parseFloat(previousNumber.replace(",", "."));
+            let n2 = parseFloat(currentNumber.replace(",", "."));
 
             if (operator === "+") {
                 result = n1 + n2;
@@ -107,8 +109,10 @@
                 result = n1 / n2;
             }
 
-            display.value = result;
-            currentNumber = String(result);
+            let resultText = String(result).replace(".", ",");
+
+            display.value = resultText;
+            currentNumber = resultText;
             previousNumber = "";
             operator = "";
         }
