@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Safari</title>
+    <link rel="stylesheet" href="navegador.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=SF+Pro+Display:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Barra de carga -->
+    <div class="loading-bar" id="loading-bar"></div>
+
+    <!-- Barra de herramientas superior -->
+    <div class="toolbar">
+      <!-- Botones de navegación -->
+      <div class="nav-buttons">
+        <button class="nav-button" id="back-btn" title="Atrás" disabled>
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="nav-button" id="forward-btn" title="Adelante" disabled>
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        <button class="nav-button" id="refresh-btn" title="Recargar">
+          <i class="fas fa-redo"></i>
+        </button>
+      </div>
+
+      <!-- Barra de URL -->
+      <div class="url-container">
+        <div class="url-icon">
+          <i class="fas fa-lock" id="security-icon"></i>
+        </div>
+        <input
+          type="text"
+          class="url-input"
+          id="url-input"
+          placeholder="Buscar o ingresar dirección web"
+          value="https://www.google.com"
+        />
+        <div class="url-actions">
+          <button class="url-action" id="clear-url" title="Limpiar">
+            <i class="fas fa-times"></i>
+          </button>
+          <button class="url-action" id="go-url" title="Ir">
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Botones adicionales -->
+      <div class="extra-buttons">
+        <button class="nav-button" id="bookmarks-btn" title="Marcadores">
+          <i class="fas fa-bookmark"></i>
+        </button>
+        <button class="nav-button" id="new-tab-btn" title="Nueva pestaña">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Área de pestañas -->
+    <div class="tabs-container">
+      <div class="tab active">
+        <div class="tab-favicon">
+          <i class="fas fa-globe"></i>
+        </div>
+        <span class="tab-title">Google</span>
+        <button class="tab-close">&times;</button>
+      </div>
+
+      <div class="tab">
+        <div class="tab-favicon">
+          <i class="fas fa-file-alt"></i>
+        </div>
+        <span class="tab-title">Página de inicio</span>
+        <button class="tab-close">&times;</button>
+      </div>
+
+      <button class="new-tab-btn" id="add-tab-btn">
+        <i class="fas fa-plus"></i>
+      </button>
+    </div>
+
+    <!-- Contenedor principal del navegador -->
+    <div class="browser-container">
+      <!-- Vista de inicio  -->
+      <div class="start-page" id="start-page">
+        <div class="start-content">
+          <!-- Logo y búsqueda -->
+          <div class="start-header">
+            <div class="safari-logo">
+              <i class="fas fa-compass"></i>
+            </div>
+            <h1>Safari WebOS</h1>
+            <p class="start-subtitle">
+              Navega por la web de forma segura y rápida
+            </p>
+          </div>
+
+          <!-- Barra de búsqueda en página de inicio -->
+          <div class="start-search">
+            <div class="search-container">
+              <i class="fas fa-search search-icon"></i>
+              <input
+                type="text"
+                class="search-input"
+                placeholder="Buscar en Google o escribir dirección web"
+                id="start-search-input"
+              />
+              <button class="search-button" id="start-search-btn">
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Favoritos/Marcadores -->
+          <div class="favorites-section">
+            <h2 class="section-title">Favoritos</h2>
+            <div class="favorites-grid">
+              <!-- Google -->
+              <a href="#" class="favorite-item">
+                <div class="favorite-icon" style="background: #4285f4">
+                  <i class="fab fa-google"></i>
+                </div>
+                <span class="favorite-title">Google</span>
+              </a>
+
+              <!-- YouTube -->
+              <a href="#" class="favorite-item">
+                <div class="favorite-icon" style="background: #ff0000">
+                  <i class="fab fa-youtube"></i>
+                </div>
+                <span class="favorite-title">YouTube</span>
+              </a>
+
+              <!-- Wikipedia -->
+              <a href="#" class="favorite-item">
+                <div class="favorite-icon" style="background: #000000">
+                  <i class="fab fa-wikipedia-w"></i>
+                </div>
+                <span class="favorite-title">Wikipedia</span>
+              </a>
+
+              <!-- GitHub -->
+              <a href="#" class="favorite-item">
+                <div class="favorite-icon" style="background: #181717">
+                  <i class="fab fa-github"></i>
+                </div>
+                <span class="favorite-title">GitHub</span>
+              </a>
+
+              <!-- Twitter -->
+              <a href="#" class="favorite-item">
+                <div class="favorite-icon" style="background: #1da1f2">
+                  <i class="fab fa-twitter"></i>
+                </div>
+                <span class="favorite-title">Twitter</span>
+              </a>
+
+              <!-- Reddit -->
+              <a href="#" class="favorite-item">
+                <div class="favorite-icon" style="background: #ff4500">
+                  <i class="fab fa-reddit"></i>
+                </div>
+                <span class="favorite-title">Reddit</span>
+              </a>
+
+              <!-- Gmail -->
+              <a href="#" class="favorite-item">
+                <div class="favorite-icon" style="background: #ea4335">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <span class="favorite-title">Gmail</span>
+              </a>
+
+              <!-- WhatsApp Web -->
+              <a href="#" class="favorite-item">
+                <div class="favorite-icon" style="background: #25d366">
+                  <i class="fab fa-whatsapp"></i>
+                </div>
+                <span class="favorite-title">WhatsApp</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Historial rápido -->
+          <div class="history-section">
+            <h2 class="section-title">Historial reciente</h2>
+            <div class="history-list">
+              <a href="#" class="history-item">
+                <i class="fas fa-history"></i>
+                <span>Riwi</span>
+              </a>
+              <a href="#" class="history-item">
+                <i class="fas fa-history"></i>
+                <span>WebOS Nova - Documentación</span>
+              </a>
+              <a href="#" class="history-item">
+                <i class="fas fa-history"></i>
+                <span>GitHub</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Iframe para mostrar-->
+      <iframe
+        class="browser-frame"
+        id="browser-frame"
+        name="browser-frame"
+        src="about:blank"
+        style="display: none"
+        sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+      >
+      </iframe>
+    </div>
+
+    <!-- Indicador de estado -->
+    <div class="status-indicator" id="status-indicator">Cargando página...</div>
+    <script src="./navegador.js"></script>
+  </body>
+</html>
