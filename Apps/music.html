@@ -17,24 +17,67 @@
         <link rel="stylesheet" href="music_styles.css">
     </head>
     <body>
-        <div id="itunesWindow">
+        <div id="musicWindow">
             <div id="titleBar">
-
-                <div id="contentArea">
-                    <h3>Music Library</h3>
-                    <p>Your songs will appear here...</p>
-                </div>
+                <h3>Music Library</h3>
             </div>
+
+            <div id="mainArea">
+
+                <div id="sidebar">
+                    <h4>Playlists</h4>
+                    <p>Favorites</p>
+                    <p>Chill</p>
+                    <p>Top Songs</p>
+                </div>
+
+                <div id="albumGrid">
+                    <div class="albumBox" onclick="playAlbum('rain.mp3', 'The Edge of Glory - Lady Gaga')">
+                        <img src="media/born_this_way.jpeg" class="albumImg">
+                        <p>The Edge of Glory Lady Gaga</p>
+                    </div>
+
+                    <div class="albumBox" onclick="playAlbum('song2.mp3', 'Afgan K - Yeico X Toni')">
+                        <img src="media/afgan_k.jpeg" class="albumImg">
+                        <p>Afgan K <br>Yeico X Toni</p>
+                    </div>
+
+                    <div class="albumBox" onclick="playAlbum('song3.mp3', 'Cariñito - Rodolfo Aicardi')">
+                        <img src="media/rodolfo.jpeg" class="albumImg">
+                        <p>Cariñito <br>Rodolfo Aicardi</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="playerBar">
+                <button onclick="playPrev()">⏮</button>
+                <button onclick="togglePlay()">⏯</button>
+                <button onclick="playNext()">⏭</button>
+
+                <input id="volumeSlider" type="range" min="0" max="1" step="0.01" value="1">
+
+                <span id="songName">No song playing</span>
+            </div>
+            <audio id="audioPlayer"></audio>
         </div>
 
         <script>
             let windowBox = document.getElementById("itunesWindow");
             let titleBar = document.getElementById("titleBar");
 
+            let audio = document.getElementById("audioPlayer");
+            let songLabel = document.getElementById("songName");
+            let volumeSlider = document.getElementById("volumeSlider");
+
             let moving = false;
             let offsetX = 0;
             let offsetY = 0;
 
+            let currentSong = "";
+            let currentSongName = "";
+
+            // Move window
             titleBar.addEventListener("mousedown", function(event) {
                 moving = true;
                 offsetX = event.clientX - windowBox.offsetLeft;
@@ -52,6 +95,70 @@
                     windowBox.style.top = (event.clientY - offsetY) + "px";
                 }
             });
+
+            // Click an album to play the song
+            function playAlbum(songFile, title) {
+                currentSong = songFile;
+                currentSongName = title;
+
+                audio.src = songFile;
+                audio.play();
+
+                songLabel.textContent = "Playing: " + title;
+            }
+
+            // Play/pause button
+            function togglePlay() {
+                if (audio.paused) {
+                    audio.play();
+                } else {
+                    audio.pause();
+                }
+            }
+
+            // Very simple next/previous (just restarts)
+            function playNext() {
+                audio.currentTime = 0;
+                audio.play();
+            }
+
+            function playPrev() {
+                audio.currentTime = 0;
+                audio.play();
+            }
+
+            // Volume control
+            volumeSlider.addEventListener("input", function() {
+                audio.volume = volumeSlider.value;
+            });
+
+
+
+
+            // let windowBox = document.getElementById("itunesWindow");
+            // let titleBar = document.getElementById("titleBar");
+
+            // let moving = false;
+            // let offsetX = 0;
+            // let offsetY = 0;
+
+            // titleBar.addEventListener("mousedown", function(event) {
+            //     moving = true;
+            //     offsetX = event.clientX - windowBox.offsetLeft;
+            //     offsetY = event.clientY - windowBox.offsetTop;
+            // });
+
+            // document.addEventListener("mouseup", function() {
+            //     moving = false;
+            // });
+
+            // document.addEventListener("mousemove", function(event) {
+            //     if (moving === true) {
+            //         windowBox.style.position = "absolute";
+            //         windowBox.style.left = (event.clientX - offsetX) + "px";
+            //         windowBox.style.top = (event.clientY - offsetY) + "px";
+            //     }
+            // });
 
         </script>
     

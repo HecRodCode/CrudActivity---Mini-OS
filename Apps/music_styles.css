@@ -5,23 +5,22 @@ html{
     color: #2C3E50;
 }
 
-#itunesWindow {
-    width: 500px;
-    height: 300px;
+#musicWindow {
+    width: 600px;
+    height: 420px;
     background: #f2f2f2;
     border: 1px solid #ccc;
     border-radius: 10px;
-    font-family: Arial, sans-serif;
+    overflow: hidden;
 }
 
 #titleBar {
-    background: #e0e0e0;
     height: 30px;
+    background: #e0e0e0;
     display: flex;
     align-items: center;
     padding-left: 10px;
     position: relative;
-    border-radius: 10px;
 }
 
 #windowTitle {
@@ -32,12 +31,62 @@ html{
     margin: 0;
 }
 
-#contentArea {
-    padding: 15px;
+#mainArea {
+    display: flex;
+    height: calc(100% - 70px); 
 }
 
-#contentArea h3{
-    margin-top: 3em;
+#sidebar {
+    width: 150px;
+    background: #dcdcdc;
+    padding: 10px;
+    border-right: 1px solid #bbb;
 }
+
+#sidebar h4 {
+    margin-top: 0;
+}
+
+#albumGrid {
+    flex: 1;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.albumBox {
+    background: #ffffff;
+    border: 1px solid #ccc;
+    text-align: center;
+    padding: 5px;
+    height: fit-content;
+}
+
+.albumBox:hover{
+    background-color:  #c3c3c330
+}
+
+.albumImg {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+#playerBar {
+    height: 40px;
+    background: #e0e0e0;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    gap: 10px;
+    border-top: 1px solid #bbb;
+}
+
+#volumeSlider {
+    width: 100px;
+}
+
 
 
