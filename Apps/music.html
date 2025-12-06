@@ -27,24 +27,37 @@
                 <div id="sidebar">
                     <h4>Playlists</h4>
                     <p>Favorites</p>
+                    <ul id="favoritesList"></ul>
                     <p>Chill</p>
                     <p>Top Songs</p>
                 </div>
 
                 <div id="albumGrid">
-                    <div class="albumBox" onclick="playAlbum('rain.mp3', 'The Edge of Glory - Lady Gaga')">
-                        <img src="media/born_this_way.jpeg" class="albumImg">
-                        <p>The Edge of Glory Lady Gaga</p>
+                    <div class="albumBox">
+                        <div class="songBox" onclick="playAlbum('song1.mp3', 'The Edge of Glory - Lady Gaga')">
+                            <img src="media/born_this_way.jpeg" class="albumImg">
+                            <p>The Edge of Glory Lady Gaga</p>
+                        </div>
+                        <button class="favorite" onclick="addFavorite('song1.mp3','The Edge of Glory')"></button>
+
                     </div>
 
-                    <div class="albumBox" onclick="playAlbum('song2.mp3', 'Afgan K - Yeico X Toni')">
-                        <img src="media/afgan_k.jpeg" class="albumImg">
-                        <p>Afgan K <br>Yeico X Toni</p>
+                    <div class="albumBox">
+                        <div class="songBox" onclick="playAlbum('song2.mp3', 'Afgan K - Yeico X Toni')">
+                            <img src="media/afgan_k.jpeg" class="albumImg">
+                            <p>Afgan K <br>Yeico X Toni</p>
+                        </div>
+                        <button class="favorite" onclick="addFavorite('song2.mp3','Afgan K')"></button>
                     </div>
 
-                    <div class="albumBox" onclick="playAlbum('song3.mp3', 'Cariñito - Rodolfo Aicardi')">
-                        <img src="media/rodolfo.jpeg" class="albumImg">
-                        <p>Cariñito <br>Rodolfo Aicardi</p>
+                    <div class="albumBox">
+                        
+                        <div class="songBox" onclick="playAlbum('song3.mp3', 'Cariñito - Rodolfo Aicardi')">
+                            <img src="media/rodolfo.jpeg" class="albumImg">
+                            <p>Cariñito <br>Rodolfo Aicardi</p>
+                        </div>
+                        <button class="favorite" onclick="addFavorite('song3.mp3','Cariñito')"></button>
+                        
                     </div>
                 </div>
 
@@ -63,40 +76,51 @@
         </div>
 
         <script>
-            let windowBox = document.getElementById("itunesWindow");
-            let titleBar = document.getElementById("titleBar");
 
             let audio = document.getElementById("audioPlayer");
             let songLabel = document.getElementById("songName");
             let volumeSlider = document.getElementById("volumeSlider");
-
-            let moving = false;
-            let offsetX = 0;
-            let offsetY = 0;
+            let favoritesList = document.getElementById("favoritesList");
 
             let currentSong = "";
             let currentSongName = "";
 
-            // Move window
-            titleBar.addEventListener("mousedown", function(event) {
-                moving = true;
-                offsetX = event.clientX - windowBox.offsetLeft;
-                offsetY = event.clientY - windowBox.offsetTop;
-            });
+            function addFavorite(songFile, songName) {
 
-            document.addEventListener("mouseup", function() {
-                moving = false;
-            });
-
-            document.addEventListener("mousemove", function(event) {
-                if (moving === true) {
-                    windowBox.style.position = "absolute";
-                    windowBox.style.left = (event.clientX - offsetX) + "px";
-                    windowBox.style.top = (event.clientY - offsetY) + "px";
+                let items = favoritesList.getElementsByTagName("li");
+                for (let i = 0; i < items.length; i++) {
+                    if (items[i].dataset.file === songFile) {
+                        return; 
+                    }
                 }
-            });
 
-            // Click an album to play the song
+                let item = document.createElement("li");
+                item.textContent = songName;
+                
+                item.dataset.file = songFile;
+                item.style.cursor = "pointer";
+
+                item.onclick = function() {
+                    playAlbum(songFile, songName);
+                };
+
+                let removeBtn = document.createElement("button");
+                removeBtn.textContent = "🗑️";
+                removeBtn.style.marginLeft = "10px";
+                removeBtn.style.border = "none"
+                removeBtn.style.background = "transparent";
+                removeBtn.style.cursor = "pointer";
+
+                removeBtn.onclick = function(event) {
+                    event.stopPropagation(); 
+                    favoritesList.removeChild(item);
+                };
+
+                item.appendChild(removeBtn);
+
+                favoritesList.appendChild(item);
+            }
+
             function playAlbum(songFile, title) {
                 currentSong = songFile;
                 currentSongName = title;
@@ -107,7 +131,6 @@
                 songLabel.textContent = "Playing: " + title;
             }
 
-            // Play/pause button
             function togglePlay() {
                 if (audio.paused) {
                     audio.play();
@@ -116,7 +139,6 @@
                 }
             }
 
-            // Very simple next/previous (just restarts)
             function playNext() {
                 audio.currentTime = 0;
                 audio.play();
@@ -127,38 +149,10 @@
                 audio.play();
             }
 
-            // Volume control
             volumeSlider.addEventListener("input", function() {
                 audio.volume = volumeSlider.value;
             });
 
-
-
-
-            // let windowBox = document.getElementById("itunesWindow");
-            // let titleBar = document.getElementById("titleBar");
-
-            // let moving = false;
-            // let offsetX = 0;
-            // let offsetY = 0;
-
-            // titleBar.addEventListener("mousedown", function(event) {
-            //     moving = true;
-            //     offsetX = event.clientX - windowBox.offsetLeft;
-            //     offsetY = event.clientY - windowBox.offsetTop;
-            // });
-
-            // document.addEventListener("mouseup", function() {
-            //     moving = false;
-            // });
-
-            // document.addEventListener("mousemove", function(event) {
-            //     if (moving === true) {
-            //         windowBox.style.position = "absolute";
-            //         windowBox.style.left = (event.clientX - offsetX) + "px";
-            //         windowBox.style.top = (event.clientY - offsetY) + "px";
-            //     }
-            // });
 
         </script>
     
