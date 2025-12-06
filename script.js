@@ -1,4 +1,3 @@
-/* Clase principal del sistema operativo WebOS Nova */
 class WebOSNova {
   constructor() {
     this.init();
@@ -247,28 +246,6 @@ class WebOSNova {
   showExitDialog() {
     if (confirm("¿Estás seguro de que quieres salir de WebOS Nova?")) {
       this.showNotification("Saliendo...", "info");
-      setTimeout(() => {
-        document.body.innerHTML = `
-                    <div style="
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        height: 100vh;
-                        background: linear-gradient(135deg, #000428 0%, #004e92 100%);
-                        color: white;
-                        font-family: 'SF Pro Display', sans-serif;
-                    ">
-                        <div style="text-align: center;">
-                            <h1 style="font-size: 48px; margin-bottom: 20px;">👋</h1>
-                            <h2>WebOS Nova</h2>
-                            <p>Sistema operativo cerrado</p>
-                            <p style="margin-top: 30px; font-size: 12px; opacity: 0.7;">
-                                Recarga la página para reiniciar
-                            </p>
-                        </div>
-                    </div>
-                `;
-      }, 1000);
     }
   }
 

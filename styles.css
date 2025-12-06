@@ -188,7 +188,7 @@ quick-settings-panel {
 /* Grid principal de controles */
 .quick-controls-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr; 
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
   margin-bottom: 20px;
 }
@@ -263,7 +263,7 @@ quick-settings-panel {
   border-radius: 14px;
   padding: 0;
   border: 1px solid rgba(255, 255, 255, 0.03);
-  height: 100%; 
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -716,4 +716,70 @@ quick-settings-panel {
 /* Clase para ocultar elementos */
 .hidden {
   display: none !important;
+}
+
+/* ICONOS DEL ESCRITORIO */
+.desktop-icons {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  right: 0;
+  bottom: 60px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 30px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Ícono individual del escritorio */
+.desktop-icon {
+  width: 80px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  pointer-events: auto;
+  user-select: none;
+}
+
+.desktop-icon:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.desktop-icon:active {
+  transform: scale(0.95);
+}
+
+/* Contenedor de la imagen del ícono */
+.desktop-icon-img {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #222222 0%, #444444 100%);
+  border-radius: 12px;
+  margin-bottom: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Imagen dentro del ícono */
+.doom-icon-image {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+  transition: filter 0.2s ease;
 }

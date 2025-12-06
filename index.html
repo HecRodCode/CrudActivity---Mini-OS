@@ -229,6 +229,24 @@
         </div>
       </div>
 
+      <div class="desktop-icons" id="desktop-icons">
+        <!-- Ícono de DOOM -->
+        <div
+          class="desktop-icon"
+          id="doom-icon"
+          onclick="abrirApp('./Apps/doom/doom.html', 'Doom')"
+        >
+          <div class="desktop-icon-img">
+            <img
+              src="assets/media/doom.png"
+              alt="DOOM Icon"
+              class="doom-icon-image"
+            />
+          </div>
+          <span class="desktop-icon-label">DOOM</span>
+        </div>
+      </div>
+
       <!-- Ventana de aplicaciones -->
       <div class="app-window-container" id="app-window-container">
         <div class="window-controls">
@@ -277,7 +295,7 @@
 
           <a
             class="dock-item"
-            onclick="abrirApp('apps/notas.html', 'Bloc de Notas')"
+            onclick="abrirApp('apps/notas/notita.html', 'Bloc de Notas')"
           >
             <div class="dock-icon">
               <i class="fas fa-sticky-note"></i>
@@ -287,7 +305,7 @@
 
           <a
             class="dock-item"
-            onclick="abrirApp('apps/galeria.html', 'Galería de Fotos')"
+            onclick="abrirApp('./Apps/galeria/galeria.html', 'Galería de Fotos')"
           >
             <div class="dock-icon">
               <i class="fas fa-images"></i>
@@ -307,7 +325,7 @@
 
           <a
             class="dock-item"
-            onclick="abrirApp('apps/navegador.html', 'Navegador Web')"
+            onclick="abrirApp('./Apps/navegador/navegador.html', 'Navegador Web')"
           >
             <div class="dock-icon">
               <i class="fas fa-globe"></i>
