@@ -4,7 +4,6 @@ body {
     background-color: var(--color-2);
     max-width: 390px;
     margin: 0 auto;    
-    overflow: hidden;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; 
 }
 
