@@ -1,1 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebOS Nova</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=SF+Pro+Display:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="assets/media/apple-logo.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <!-- Escritorio principal -->
+    <div class="desktop" id="desktop">
+      <!-- Barra de menú superior (menu-bar) -->
+      <div class="menu-bar">
+        <div class="menu-left">
+          <div class="apple-menu">
+            <span class="apple-logo">
+              <i class="fab fa-apple"></i>
+            </span>
+            <div class="apple-menu-dropdown">
+              <div class="menu-item">Acerca de WebOS Nova</div>
+              <div class="menu-item">Preferencias del sistema...</div>
+              <div class="separator"></div>
+              <div class="menu-item">Salir</div>
+            </div>
+          </div>
+          <span class="app-menu">Finder</span>
+          <span class="app-menu">Archivo</span>
+          <span class="app-menu">Editar</span>
+          <span class="app-menu">Ver</span>
+          <span class="app-menu">Ir</span>
+          <span class="app-menu">Ventana</span>
+          <span class="app-menu">Ayuda</span>
+        </div>
+        <div class="menu-right">
+          <span class="status-item"><i class="fas fa-wifi"></i></span>
+          <span class="status-item"><i class="fas fa-volume-up"></i></span>
+          <span class="status-item"
+            ><i class="fas fa-battery-three-quarters"></i> 87%</span
+          >
+          <span class="status-item" id="current-time">--:--</span>
+          <span class="status-item" id="current-date">--- --</span>
+          <span class="user-item">
+            <i class="fas fa-user-circle"></i>
+            <span class="username">Usuario</span>
+          </span>
+        </div>
+      </div>
 
+      <!-- Panel de configuración rápida (Control Center) -->
+      <div class="quick-settings-panel hidden" id="quick-settings">
+        <div class="quick-settings-header">
+          <h3>Control Center</h3>
+          <button class="quick-settings-close" onclick="toggleQuickSettings()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <div class="quick-controls-grid">
+          <!-- Columna izquierda: Conectividad -->
+          <div class="controls-column">
+            <div class="connectivity-group">
+              <div class="connectivity-header">
+                <h4>Conectividad</h4>
+              </div>
+
+              <!-- Wi-Fi -->
+              <div class="connectivity-item" onclick="toggleWifi()">
+                <div class="connectivity-icon">
+                  <i class="fas fa-wifi"></i>
+                </div>
+                <div class="connectivity-info">
+                  <span class="connectivity-label">Wi-Fi</span>
+                  <span class="connectivity-status" id="wifi-status"
+                    >Rimi Coders</span
+                  >
+                </div>
+                <div class="connectivity-toggle">
+                  <div class="toggle-switch active" id="wifi-switch">
+                    <div class="toggle-knob"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bluetooth -->
+              <div class="connectivity-item" onclick="toggleBluetooth()">
+                <div class="connectivity-icon">
+                  <i class="fas fa-bluetooth"></i>
+                </div>
+                <div class="connectivity-info">
+                  <span class="connectivity-label">Bluetooth</span>
+                  <span class="connectivity-status" id="bluetooth-status"
+                    >On</span
+                  >
+                </div>
+                <div class="connectivity-toggle">
+                  <div class="toggle-switch active" id="bluetooth-switch">
+                    <div class="toggle-knob"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- AirDrop -->
+              <div class="connectivity-item" onclick="toggleAirdrop()">
+                <div class="connectivity-icon">
+                  <i class="fas fa-share-alt"></i>
+                </div>
+                <div class="connectivity-info">
+                  <span class="connectivity-label">AirDrop</span>
+                  <span class="connectivity-status" id="airdrop-status"
+                    >Contacts Only</span
+                  >
+                </div>
+                <div class="connectivity-toggle">
+                  <div class="toggle-switch active" id="airdrop-switch">
+                    <div class="toggle-knob"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna derecha: Modos y pantalla -->
+          <div class="controls-column">
+            <!-- Focus -->
+            <div class="control-card focus-card" onclick="toggleFocus()">
+              <div class="control-icon">
+                <i class="fas fa-moon"></i>
+              </div>
+              <div class="control-info">
+                <h4>Focus</h4>
+                <p class="control-status" id="focus-status">Off</p>
+              </div>
+            </div>
+
+            <!-- Stage Manager -->
+            <div class="control-card stage-card" onclick="toggleStageManager()">
+              <div class="control-icon">
+                <i class="fas fa-layer-group"></i>
+              </div>
+              <div class="control-info">
+                <h4>Stage Manager</h4>
+                <p class="control-status" id="stage-status">Off</p>
+              </div>
+            </div>
+
+            <!-- Screen Mirroring -->
+            <div
+              class="control-card screen-card"
+              onclick="toggleScreenMirroring()"
+            >
+              <div class="control-icon">
+                <i class="fas fa-desktop"></i>
+              </div>
+              <div class="control-info">
+                <h4>Screen Mirroring</h4>
+                <p class="control-status" id="mirror-status">Off</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controles de hardware -->
+        <div class="hardware-controls">
+          <!-- Brillo de pantalla -->
+          <div class="hardware-slider">
+            <div class="slider-header">
+              <i class="fas fa-sun"></i>
+              <span>Display</span>
+            </div>
+            <div class="slider-container">
+              <input
+                type="range"
+                class="hardware-range"
+                id="display-brightness"
+                min="10"
+                max="100"
+                value="75"
+              />
+              <div class="slider-value" id="brightness-value">75%</div>
+            </div>
+          </div>
+
+          <!-- Volumen -->
+          <div class="hardware-slider">
+            <div class="slider-header">
+              <i class="fas fa-volume-up"></i>
+              <span>Sound</span>
+            </div>
+            <div class="slider-container">
+              <input
+                type="range"
+                class="hardware-range"
+                id="volume-control"
+                min="0"
+                max="100"
+                value="65"
+              />
+              <div class="slider-value" id="volume-value">65%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reproductor de música -->
+        <div class="music-player" onclick="openMusicApp()">
+          <div class="music-album">
+            <i class="fas fa-music"></i>
+          </div>
+          <div class="music-info">
+            <h4>The Edge Of Glory</h4>
+            <p class="music-artist">Lady Gaga – Born This Way</p>
+          </div>
+          <div class="music-controls">
+            <button
+              class="music-btn"
+              onclick="event.stopPropagation(); togglePlay()"
+            >
+              <i class="fas fa-play" id="play-icon"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="desktop-icons" id="desktop-icons">
+        <!-- Ícono de DOOM -->
+        <div
+          class="desktop-icon"
+          id="doom-icon"
+          onclick="abrirApp('./Apps/doom/doom.html', 'Doom')"
+        >
+          <div class="desktop-icon-img">
+            <img
+              src="assets/media/doom.png"
+              alt="DOOM Icon"
+              class="doom-icon-image"
+            />
+          </div>
+          <span class="desktop-icon-label">DOOM</span>
+        </div>
+      </div>
+
+      <!-- Ventana de aplicaciones -->
+      <div class="app-window-container" id="app-window-container">
+        <div class="window-controls">
+          <div class="control-btn close"></div>
+          <div class="control-btn minimize"></div>
+          <div class="control-btn maximize"></div>
+          <span class="window-title" id="window-title"
+            >Bienvenido a WebOS Nova</span
+          >
+        </div>
+        <iframe
+          name="ventana-app"
+          id="ventana-app"
+          class="app-window"
+          src="apps/bienvenida.html"
+          title="Ventana de aplicación"
+        >
+        </iframe>
+      </div>
+
+      <!-- Dock de aplicaciones -->
+      <div class="dock-container">
+        <div class="dock" id="dock">
+          <div class="dock-separator"></div>
+          <a
+            class="dock-item finder hidden"
+            onclick="restoreWindow()"
+            id="finder-icon"
+          >
+            <div class="dock-icon">
+              <i class="fas fa-window-restore"></i>
+            </div>
+            <span class="dock-tooltip">Restaurar ventana</span>
+          </a>
+
+          <!-- Aplicaciones del dock -->
+          <a
+            class="dock-item"
+            onclick="abrirApp('apps/calculadora.html', 'Calculadora')"
+          >
+            <div class="dock-icon">
+              <i class="fas fa-calculator"></i>
+            </div>
+            <span class="dock-tooltip">Calculadora</span>
+          </a>
+
+          <a
+            class="dock-item"
+            onclick="abrirApp('apps/notas/notita.html', 'Bloc de Notas')"
+          >
+            <div class="dock-icon">
+              <i class="fas fa-sticky-note"></i>
+            </div>
+            <span class="dock-tooltip">Notas</span>
+          </a>
+
+          <a
+            class="dock-item"
+            onclick="abrirApp('./Apps/galeria/galeria.html', 'Galería de Fotos')"
+          >
+            <div class="dock-icon">
+              <i class="fas fa-images"></i>
+            </div>
+            <span class="dock-tooltip">Galería</span>
+          </a>
+
+          <a
+            class="dock-item"
+            onclick="abrirApp('apps/musica.html', 'Reproductor de Música')"
+          >
+            <div class="dock-icon">
+              <i class="fas fa-music"></i>
+            </div>
+            <span class="dock-tooltip">Música</span>
+          </a>
+
+          <a
+            class="dock-item"
+            onclick="abrirApp('./Apps/navegador/navegador.html', 'Navegador Web')"
+          >
+            <div class="dock-icon">
+              <i class="fas fa-globe"></i>
+            </div>
+            <span class="dock-tooltip">Navegador</span>
+          </a>
+
+          <a class="dock-item" onclick="abrirApp('apps/juego.html', 'Juegos')">
+            <div class="dock-icon">
+              <i class="fas fa-gamepad"></i>
+            </div>
+            <span class="dock-tooltip">Juegos</span>
+          </a>
+
+          <a
+            class="dock-item"
+            onclick="abrirApp('apps/configuracion.html', 'Configuración')"
+          >
+            <div class="dock-icon">
+              <i class="fas fa-cog"></i>
+            </div>
+            <span class="dock-tooltip">Configuración</span>
+          </a>
+
+          <div class="dock-separator"></div>
+
+          <!-- Papelera -->
+          <div class="dock-item trash" id="trash-bin">
+            <div class="dock-icon">
+              <i class="fas fa-trash"></i>
+            </div>
+            <span class="dock-tooltip">Papelera</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Área de notificaciones -->
+      <div class="notification-area" id="notification-area">
+        <div class="notification" id="welcome-notification">
+          <i class="fas fa-rocket"></i>
+          <span>WebOS Nova iniciado correctamente</span>
+          <button
+            class="notification-close"
+            onclick="cerrarNotificacion('welcome-notification')"
+          >
+            ×
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts principales -->
+    <script src="script.js"></script>
+  </body>
+</html>
