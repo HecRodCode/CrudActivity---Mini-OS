@@ -1,0 +1,341 @@
+.quick-settings-panel {
+  position: absolute;
+  top: 40px;
+  right: 20px;
+  width: 340px;
+  background: rgba(40, 40, 42, 0.95);
+  backdrop-filter: blur(60px) saturate(180%);
+  -webkit-backdrop-filter: blur(60px) saturate(180%);
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 20px;
+  z-index: 2000;
+  animation: fadeInUp 0.3s ease;
+  display: block;
+  color: #fff;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(-15px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.quick-settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.quick-settings-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.2px;
+}
+
+.quick-settings-close {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.quick-settings-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.control-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.control-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 15px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  position: relative;
+}
+
+.control-card.large {
+  grid-column: span 1;
+}
+
+.control-card:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+.control-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #fff;
+}
+
+.control-card.large .control-icon {
+  background: linear-gradient(135deg, #00b4db, #0083b0);
+}
+
+.control-card .bluetooth {
+  background: linear-gradient(135deg, #5856d6, #af52de);
+}
+
+.control-card .airdrop {
+  background: linear-gradient(135deg, #34c759, #30b0c7);
+}
+
+.control-card .focus {
+  background: linear-gradient(135deg, #5ac8fa, #007aff);
+}
+
+.control-card .stage {
+  background: linear-gradient(135deg, #ff9500, #ff5e3a);
+}
+
+.control-card .mirror {
+  background: linear-gradient(135deg, #ff2d55, #ff3b30);
+}
+
+.control-info h4 {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 4px;
+  letter-spacing: 0.3px;
+}
+
+.control-status {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 400;
+  letter-spacing: 0.2px;
+}
+
+.control-toggle {
+  position: absolute;
+  top: 15px;
+  right: 12px;
+}
+
+.toggle-switch {
+  width: 36px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+.toggle-switch.active {
+  background: #30d158;
+}
+
+.toggle-knob {
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s ease;
+}
+
+.toggle-switch.active .toggle-knob {
+  transform: translateX(16px);
+}
+
+/* Controles de hardware */
+.hardware-controls {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 15px;
+}
+
+.hardware-slider {
+  margin-bottom: 15px;
+}
+
+.hardware-slider:last-child {
+  margin-bottom: 0;
+}
+
+.slider-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.slider-header i {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-right: 10px;
+  width: 20px;
+}
+
+.slider-header span {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  flex-grow: 1;
+}
+
+.slider-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hardware-range {
+  flex-grow: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  -webkit-appearance: none;
+  outline: none;
+}
+
+.hardware-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.slider-value {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  min-width: 35px;
+  text-align: right;
+}
+
+/* Reproductor de música */
+.music-player {
+  background: linear-gradient(
+    135deg,
+    rgba(120, 119, 198, 0.2),
+    rgba(86, 98, 246, 0.15)
+  );
+  border-radius: 14px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.music-player:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(120, 119, 198, 0.25),
+    rgba(86, 98, 246, 0.2)
+  );
+}
+
+.music-album {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #ff2d55, #5856d6);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  color: #fff;
+  font-size: 18px;
+}
+
+.music-info {
+  flex-grow: 1;
+}
+
+.music-info h4 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 3px;
+  letter-spacing: -0.1px;
+}
+
+.music-artist {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 400;
+}
+
+.music-controls {
+  margin-left: 10px;
+}
+
+.music-btn {
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.music-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .quick-settings-panel {
+    width: 320px;
+    right: 10px;
+    top: 35px;
+  }
+
+  .control-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .control-card.large {
+    grid-column: span 2;
+  }
+}

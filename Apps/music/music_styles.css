@@ -1,0 +1,126 @@
+html,body{
+    font-size: 90%;
+    background-color: #1A1C2C;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; 
+    color: #2C3E50;
+}
+
+#musicWindow {
+    width: 650px;
+    height: 420px;
+    background: #f2f2f2;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#titleBar {
+    height: 30px;
+    background: #e0e0e0;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    position: relative;
+}
+
+#windowTitle {
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin: 0;
+}
+
+#mainArea {
+    display: flex;
+    height: calc(100% - 70px); 
+}
+
+#sidebar {
+    width: 200px;
+    background: #dcdcdc;
+    padding: 10px;
+    border-right: 1px solid #bbb;
+}
+
+#sidebar h4 {
+    margin-top: 0;
+}
+
+#albumGrid {
+    flex: 1;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.albumBox {
+    background: #ffffff;
+    border: 1px solid #ccc;
+    text-align: center;
+    padding: 5px;
+    height: fit-content;
+    border-radius: 10px;
+}
+
+.songBox:hover{
+    padding:1px;
+    background-color:  #c3c3c330
+}
+
+.albumImg {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.favorite{
+    width: 20px;
+    height: 20px;
+    border:none;
+    background: none;
+}
+
+.favorite {
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    background-image: url(Apps/music/empty_like.png);
+    background-repeat: no-repeat;
+}
+
+.favorite:hover{
+    background-image: url(Apps/music/filled_like.png);
+    z-index: 999;
+    border: unset;
+    cursor: pointer;
+}
+
+#playerBar {
+    height: 40px;
+    background: #e0e0e0;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    gap: 10px;
+    border-top: 1px solid #bbb;
+}
+
+#playerBar button{
+    border-width: 2px;
+    border-radius: 5px;
+}
+
+#playerBar button:hover{
+    background-color:  #c3c3c330
+}
+
+
+#volumeSlider {
+    width: 100px;
+}
+
+
+

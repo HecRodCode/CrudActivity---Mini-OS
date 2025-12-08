@@ -1,0 +1,785 @@
+@import "./styles/control-panel.css";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --bg-tertiary: #21262d;
+  --text-primary: #f0f6fc;
+  --text-secondary: #8b949e;
+  --text-tertiary: #6e7681;
+  --accent-primary: #00ff9d;
+  --accent-secondary: #00d4aa;
+  --accent-hover: #00e695;
+  --border-color: #30363d;
+  --shadow-color: rgba(0, 0, 0, 0.4);
+  --success: #00ff9d;
+  --warning: #ffd166;
+  --error: #ff6b6b;
+  --info: #4cc9f0;
+  --gradient-primary: linear-gradient(135deg, #00ff9d 0%, #00b4d8 100%);
+  --gradient-bg: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+  --shadow-large: 0 25px 50px -12px var(--shadow-color);
+  --shadow-medium: 0 10px 30px var(--shadow-color);
+  --shadow-small: 0 2px 10px var(--shadow-color);
+  --glass-bg: rgba(22, 27, 34, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+  font-family: "SF Pro Display", "Inter", -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  background: url("assets/media/wallpaper.jpg") no-repeat center center fixed;
+  background-size: cover;
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+@keyframes gradientShift {
+  0%,
+  100% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(15deg);
+  }
+}
+/* ===== ESCRITORIO ===== */
+.desktop {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ===== BARRA DE MENÚ SUPERIOR ===== */
+.menu-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background: rgba(28, 28, 30, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  font-size: 13px;
+  font-weight: 500;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.menu-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.apple-menu {
+  position: relative;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.apple-menu:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.apple-menu:hover .apple-menu-dropdown {
+  display: block;
+}
+
+.apple-logo {
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.apple-menu-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(40, 40, 42, 0.95);
+  backdrop-filter: blur(30px);
+  border-radius: 8px;
+  padding: 8px 0;
+  min-width: 200px;
+  box-shadow: var(--shadow-large);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 1001;
+}
+
+.apple-menu-dropdown .menu-item {
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.apple-menu-dropdown .menu-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.apple-menu-dropdown .separator {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 4px 0;
+}
+
+.app-menu {
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: default;
+  transition: background 0.2s;
+  opacity: 0.9;
+}
+
+.app-menu:hover {
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 1;
+}
+
+.menu-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  opacity: 0.9;
+  font-size: 12px;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.user-item i {
+  font-size: 16px;
+}
+
+.username {
+  font-size: 12px;
+}
+
+quick-settings-panel {
+  width: 380px;
+}
+
+/* Grid principal de controles */
+.quick-controls-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+/* Columnas individuales */
+.controls-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Estilos para las tarjetas de la columna izquierda */
+.control-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100px;
+}
+
+.control-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+.control-card .control-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #fff;
+}
+
+.focus-card .control-icon {
+  background: rgba(90, 200, 250, 0.2); /* Azul suave */
+}
+
+.stage-card .control-icon {
+  background: rgba(255, 149, 0, 0.2); /* Naranja suave */
+}
+
+.screen-card .control-icon {
+  background: rgba(255, 45, 85, 0.2); /* Rojo suave */
+}
+
+.control-info h4 {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 4px;
+}
+
+.control-status {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 400;
+}
+
+.connectivity-group {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.connectivity-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+
+.connectivity-header h4 {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.connectivity-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  position: relative;
+  flex: 1;
+  min-height: 60px;
+}
+
+.connectivity-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.connectivity-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 16px;
+  right: 16px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.connectivity-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+}
+
+.connectivity-icon i {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.connectivity-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.connectivity-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2px;
+}
+
+.connectivity-status {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 400;
+}
+
+.connectivity-toggle {
+  margin-left: auto;
+}
+
+.hardware-controls {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 15px;
+}
+
+/* Ajustar reproductor de música */
+.music-player {
+  margin-top: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .quick-settings-panel {
+    width: 340px;
+  }
+
+  .quick-controls-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .controls-column {
+    gap: 10px;
+  }
+
+  .control-card {
+    height: 90px;
+  }
+}
+
+/* ===== VENTANA DE APLICACIONES ===== */
+.app-window-container {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1200px;
+  height: 75vh;
+  min-height: 500px;
+  background: var(--dark-bg);
+  border-radius: 16px;
+  box-shadow: var(--shadow-large);
+  overflow: hidden;
+  z-index: 100;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  animation: windowFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes windowFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+.window-controls {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  background: rgba(40, 40, 42, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  gap: 12px;
+}
+
+.control-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.control-btn:hover {
+  transform: scale(1.1);
+}
+
+.control-btn.close {
+  background: #ff5f57;
+}
+
+.control-btn.minimize {
+  background: #febc2e;
+}
+
+.control-btn.maximize {
+  background: #28c840;
+}
+
+.window-title {
+  margin-left: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  flex-grow: 1;
+  text-align: center;
+}
+
+.app-window {
+  width: 100%;
+  height: calc(100% - 45px);
+  border: none;
+  background: var(--dark-bg);
+}
+
+.dock-item.finder.has-window {
+  background: rgba(0, 255, 157, 0.15);
+  animation: pulse 2s infinite;
+}
+
+.dock-item.finder.has-window:hover {
+  background: rgba(0, 255, 157, 0.25);
+}
+
+/* ===== DOCK ===== */
+.dock-container {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.dock {
+  display: flex;
+  align-items: center;
+  background: rgba(28, 28, 30, 0.5);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border-radius: 24px;
+  padding: 8px 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  gap: 4px;
+}
+
+.dock-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin: 0 2px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.dock-item:hover {
+  transform: translateY(-15px) scale(1.2);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.dock-item.trash {
+  background: rgba(255, 95, 87, 0.1);
+}
+
+.dock-item.trash:hover {
+  background: rgba(255, 95, 87, 0.2);
+}
+
+.dock-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.dock-icon i {
+  font-size: 22px;
+  transition: transform 0.3s;
+}
+
+.dock-item:hover .dock-icon i {
+  transform: scale(1.1);
+}
+
+.dock-tooltip {
+  position: absolute;
+  bottom: -40px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+  backdrop-filter: blur(10px);
+}
+
+.dock-item:hover .dock-tooltip {
+  opacity: 1;
+}
+
+.dock-separator {
+  width: 1px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 0 8px;
+}
+
+/* ===== NOTIFICACIONES ===== */
+.notification-area {
+  position: absolute;
+  top: 40px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.notification {
+  background: rgba(40, 40, 42, 0.95);
+  backdrop-filter: blur(30px);
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 300px;
+  box-shadow: var(--shadow-medium);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  animation: slideInRight 0.3s ease;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.notification i {
+  color: var(--accent-blue);
+  font-size: 16px;
+}
+
+.notification span {
+  flex-grow: 1;
+  font-size: 13px;
+}
+
+.notification-close {
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0 4px;
+  transition: color 0.2s;
+}
+
+.notification-close:hover {
+  color: var(--text-primary);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+  .app-window-container {
+    width: 95%;
+    height: 70vh;
+  }
+
+  .desktop-icons {
+    top: 80px;
+    left: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .desktop-icons {
+    display: none;
+  }
+
+  .dock {
+    padding: 6px 12px;
+    border-radius: 18px;
+  }
+
+  .dock-item {
+    width: 44px;
+    height: 44px;
+  }
+
+  .dock-icon i {
+    font-size: 18px;
+  }
+
+  .app-window-container {
+    top: 40px;
+    height: 65vh;
+  }
+
+  .menu-bar {
+    padding: 0 10px;
+    font-size: 11px;
+  }
+
+  .app-menu {
+    display: none;
+  }
+
+  .app-menu:first-child {
+    display: inline;
+  }
+}
+
+/* EFECTOS ESPECIALES */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Clase para ocultar elementos */
+.hidden {
+  display: none !important;
+}
+
+/* ICONOS DEL ESCRITORIO */
+.desktop-icons {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  right: 0;
+  bottom: 60px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 30px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Ícono individual del escritorio */
+.desktop-icon {
+  width: 80px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  pointer-events: auto;
+  user-select: none;
+}
+
+.desktop-icon:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.desktop-icon:active {
+  transform: scale(0.95);
+}
+
+/* Contenedor de la imagen del ícono */
+.desktop-icon-img {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #222222 0%, #444444 100%);
+  border-radius: 12px;
+  margin-bottom: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Imagen dentro del ícono */
+.doom-icon-image {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+  transition: filter 0.2s ease;
+}

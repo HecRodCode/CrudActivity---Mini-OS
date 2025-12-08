@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notas</title>
+
+    <link rel="stylesheet" href="notas.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- SIDEBAR -->
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <div class="app-title">
+            <i class="fas fa-sticky-note"></i>
+            <span>Notas</span>
+          </div>
+          <button class="new-note-btn" id="new-note-btn">
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
+
+        <div class="notes-list" id="notes-list">
+          <!-- Aca cargan las notas -->
+          <div class="empty-state" id="empty-notes-state">
+            <i class="fas fa-sticky-note"></i>
+            <h3>No hay notas</h3>
+            <p>Crea tu primera nota haciendo clic en el botón "+"</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- EDITOR -->
+      <div class="editor" id="editor">
+        <div class="editor-header">
+          <div class="formatting-toolbar">
+            <button class="format-btn" id="bold-btn" title="Negrita (⌘B)">
+              <i class="fas fa-bold"></i>
+            </button>
+            <button class="format-btn" id="italic-btn" title="Cursiva (⌘I)">
+              <i class="fas fa-italic"></i>
+            </button>
+            <button
+              class="format-btn"
+              id="underline-btn"
+              title="Subrayado (⌘U)"
+            >
+              <i class="fas fa-underline"></i>
+            </button>
+            <div
+              style="
+                width: 1px;
+                height: 16px;
+                background: var(--border-color);
+                margin: 0 4px;
+              "
+            ></div>
+            <button class="format-btn" id="list-btn" title="Lista (⌘⇧L)">
+              <i class="fas fa-list-ul"></i>
+            </button>
+            <button
+              class="format-btn"
+              id="checklist-btn"
+              title="Lista de verificación"
+            >
+              <i class="fas fa-tasks"></i>
+            </button>
+            <div
+              style="
+                width: 1px;
+                height: 16px;
+                background: var(--border-color);
+                margin: 0 4px;
+              "
+            ></div>
+            <button class="format-btn" id="camera-btn" title="Cámara">
+              <i class="fas fa-camera"></i>
+            </button>
+          </div>
+
+          <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input
+              type="text"
+              class="search-box"
+              id="search-box"
+              placeholder="Buscar notas"
+            />
+          </div>
+        </div>
+
+        <div class="editor-content">
+          <div class="empty-state" id="empty-editor-state">
+            <i class="fas fa-edit"></i>
+            <h3>Selecciona una nota</h3>
+            <p>Selecciona una nota de la lista o crea una nueva</p>
+          </div>
+
+          <div id="note-editor" style="display: none">
+            <input
+              type="text"
+              class="note-title-input"
+              id="note-title-input"
+              placeholder="Título"
+            />
+            <div
+              class="note-body"
+              id="note-body"
+              contenteditable="true"
+              placeholder="Empieza a escribir..."
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DELETE MODAL -->
+    <div class="modal" id="delete-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Eliminar nota</h3>
+        </div>
+        <div class="modal-body">
+          Esta nota se eliminará permanentemente. ¿Estás seguro de que quieres
+          continuar?
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" id="cancel-delete">Cancelar</button>
+          <button class="btn btn-danger" id="confirm-delete">Eliminar</button>
+        </div>
+      </div>
+    </div>
+
+
+  </body>
+</html>
