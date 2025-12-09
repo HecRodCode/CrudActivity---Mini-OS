@@ -111,12 +111,12 @@ body {
   object-fit: cover;
   background-size: cover;
   background-position: center;
-  background-image: url(Apps/music/empty_like.png);
+  background-image: url(./empty_like.png);
   background-repeat: no-repeat;
 }
 
 .favorite:hover {
-  background-image: url(Apps/music/filled_like.png);
+  background-image: url(./filled_like.png);
   z-index: 999;
   border: unset;
   cursor: pointer;
