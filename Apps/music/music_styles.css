@@ -1,126 +1,183 @@
-html,body{
-    font-size: 90%;
-    background-color: #1A1C2C;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; 
-    color: #2C3E50;
+html,
+body {
+  font-size: 90%;
+  background-color: #1a1c2c;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #2c3e50;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 #musicWindow {
-    width: 650px;
-    height: 420px;
-    background: #f2f2f2;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background: #f2f2f2;
+  border: none;
+  border-radius: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 #titleBar {
-    height: 30px;
-    background: #e0e0e0;
-    display: flex;
-    align-items: center;
-    padding-left: 10px;
-    position: relative;
+  height: 30px;
+  background: #e0e0e0;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  position: relative;
+  flex-shrink: 0;
 }
 
 #windowTitle {
-    position: absolute;
-    left: 0;
-    right: 0;
-    text-align: center;
-    margin: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin: 0;
 }
 
 #mainArea {
-    display: flex;
-    height: calc(100% - 70px); 
+  display: flex;
+  flex: 1;
+  overflow: hidden;
 }
 
 #sidebar {
-    width: 200px;
-    background: #dcdcdc;
-    padding: 10px;
-    border-right: 1px solid #bbb;
+  width: 200px;
+  background: #dcdcdc;
+  padding: 10px;
+  border-right: 1px solid #bbb;
+  overflow-y: auto;
+  flex-shrink: 0;
 }
 
 #sidebar h4 {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 #albumGrid {
-    flex: 1;
-    padding: 10px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+  flex: 1;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  overflow-y: auto;
 }
 
 .albumBox {
-    background: #ffffff;
-    border: 1px solid #ccc;
-    text-align: center;
-    padding: 5px;
-    height: fit-content;
-    border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid #ccc;
+  text-align: center;
+  padding: 5px;
+  height: fit-content;
+  border-radius: 10px;
+  transition: transform 0.2s;
 }
 
-.songBox:hover{
-    padding:1px;
-    background-color:  #c3c3c330
+.albumBox:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.songBox {
+  cursor: pointer;
+}
+
+.songBox:hover {
+  padding: 1px;
+  background-color: #c3c3c330;
 }
 
 .albumImg {
-    width: 100%;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 5px;
-}
-
-.favorite{
-    width: 20px;
-    height: 20px;
-    border:none;
-    background: none;
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 5px;
 }
 
 .favorite {
-    object-fit: cover;
-    background-size: cover;
-    background-position: center;
-    background-image: url(Apps/music/empty_like.png);
-    background-repeat: no-repeat;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: none;
+  margin-top: 5px;
 }
 
-.favorite:hover{
-    background-image: url(Apps/music/filled_like.png);
-    z-index: 999;
-    border: unset;
-    cursor: pointer;
+.favorite {
+  object-fit: cover;
+  background-size: cover;
+  background-position: center;
+  background-image: url(Apps/music/empty_like.png);
+  background-repeat: no-repeat;
+}
+
+.favorite:hover {
+  background-image: url(Apps/music/filled_like.png);
+  z-index: 999;
+  border: unset;
+  cursor: pointer;
+  transform: scale(1.1);
 }
 
 #playerBar {
-    height: 40px;
-    background: #e0e0e0;
-    display: flex;
-    align-items: center;
-    padding: 0 10px;
-    gap: 10px;
-    border-top: 1px solid #bbb;
+  height: 40px;
+  background: #e0e0e0;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  gap: 10px;
+  border-top: 1px solid #bbb;
+  flex-shrink: 0;
 }
 
-#playerBar button{
-    border-width: 2px;
-    border-radius: 5px;
+#playerBar button {
+  border-width: 2px;
+  border-radius: 5px;
+  cursor: pointer;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 4px 8px;
 }
 
-#playerBar button:hover{
-    background-color:  #c3c3c330
+#playerBar button:hover {
+  background-color: #c3c3c330;
 }
-
 
 #volumeSlider {
-    width: 100px;
+  width: 100px;
 }
 
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
 
+.songBox.playing {
+  background-color: rgba(0, 255, 157, 0.1);
+  border-color: rgba(0, 255, 157, 0.3);
+}
 
+@media (max-width: 768px) {
+  #albumGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #sidebar {
+    width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  #albumGrid {
+    grid-template-columns: 1fr;
+  }
+
+  #sidebar {
+    width: 120px;
+  }
+}
