@@ -1,10 +1,584 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="./configuracion.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=SF+Pro+Display:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="configuracion.css" />
+    <title>Configuración - Nova OS</title>
   </head>
-  <body></body>
+  <body>
+    <div class="settings-app">
+      <header class="settings-header">
+        <div class="header-title">
+          <i class="fas fa-cog"></i>
+          <span>Configuración</span>
+        </div>
+        <div class="settings-search">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Buscar ajustes..."
+          />
+          <i class="fas fa-search search-icon"></i>
+        </div>
+      </header>
+
+      <div class="settings-main">
+        <nav class="settings-sidebar">
+          <div class="sidebar-section">
+            <div class="sidebar-title">General</div>
+            <div class="sidebar-item active" onclick="showSection('general')">
+              <i class="fas fa-sliders-h"></i>
+              <span>General</span>
+            </div>
+            <div class="sidebar-item" onclick="showSection('appearance')">
+              <i class="fas fa-palette"></i>
+              <span>Apariencia</span>
+            </div>
+            <div class="sidebar-item" onclick="showSection('desktop')">
+              <i class="fas fa-desktop"></i>
+              <span>Escritorio</span>
+            </div>
+          </div>
+
+          <div class="sidebar-section">
+            <div class="sidebar-title">Sistema</div>
+            <div class="sidebar-item" onclick="showSection('system')">
+              <i class="fas fa-microchip"></i>
+              <span>Rendimiento</span>
+            </div>
+            <div class="sidebar-item" onclick="showSection('storage')">
+              <i class="fas fa-hdd"></i>
+              <span>Almacenamiento</span>
+            </div>
+            <div class="sidebar-item" onclick="showSection('updates')">
+              <i class="fas fa-download"></i>
+              <span>Actualizaciones</span>
+            </div>
+          </div>
+
+          <div class="sidebar-section">
+            <div class="sidebar-title">Privacidad</div>
+            <div class="sidebar-item" onclick="showSection('privacy')">
+              <i class="fas fa-shield-alt"></i>
+              <span>Seguridad</span>
+            </div>
+            <div class="sidebar-item" onclick="showSection('notifications')">
+              <i class="fas fa-bell"></i>
+              <span>Notificaciones</span>
+            </div>
+          </div>
+
+          <div class="sidebar-section">
+            <div class="sidebar-title">Cuenta</div>
+            <div class="sidebar-item" onclick="showSection('account')">
+              <i class="fas fa-user"></i>
+              <span>Mi Cuenta</span>
+            </div>
+          </div>
+        </nav>
+
+        <div class="settings-content" id="settingsContent">
+          <div class="settings-section" id="general">
+            <div class="section-header">
+              <h2 class="section-title">Preferencias Generales</h2>
+              <p class="section-description">
+                Configura las opciones básicas del sistema
+              </p>
+            </div>
+
+            <div class="settings-grid">
+              <div class="settings-card">
+                <div class="card-header">
+                  <div class="card-icon">
+                    <i class="fas fa-language"></i>
+                  </div>
+                  <h3 class="card-title">Idioma y Región</h3>
+                </div>
+                <div class="settings-group">
+                  <div class="setting-item">
+                    <div>
+                      <div class="setting-label">Idioma del sistema</div>
+                      <div class="setting-description">
+                        Selecciona el idioma para menús y mensajes
+                      </div>
+                    </div>
+                    <select class="select-control">
+                      <option>Español</option>
+                      <option>English</option>
+                      <option>Français</option>
+                    </select>
+                  </div>
+                  <div class="setting-item">
+                    <div>
+                      <div class="setting-label">Formato de fecha</div>
+                      <div class="setting-description">
+                        Cómo se muestran las fechas
+                      </div>
+                    </div>
+                    <select class="select-control">
+                      <option>DD/MM/YYYY</option>
+                      <option>MM/DD/YYYY</option>
+                      <option>YYYY-MM-DD</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="settings-card">
+                <div class="card-header">
+                  <div class="card-icon">
+                    <i class="fas fa-keyboard"></i>
+                  </div>
+                  <h3 class="card-title">Teclado</h3>
+                </div>
+                <div class="settings-group">
+                  <div class="setting-item">
+                    <div>
+                      <div class="setting-label">Velocidad de repetición</div>
+                      <div class="setting-description">
+                        Cuán rápido se repiten las teclas
+                      </div>
+                    </div>
+                    <div class="slider-container">
+                      <input type="range" class="range-slider" value="50" />
+                      <span class="slider-value">Media</span>
+                    </div>
+                  </div>
+                  <div class="setting-item">
+                    <div>
+                      <div class="setting-label">Retraso hasta repetición</div>
+                      <div class="setting-description">
+                        Tiempo antes de que una tecla se repita
+                      </div>
+                    </div>
+                    <div class="slider-container">
+                      <input type="range" class="range-slider" value="30" />
+                      <span class="slider-value">Corto</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="settings-card">
+                <div class="card-header">
+                  <div class="card-icon">
+                    <i class="fas fa-mouse-pointer"></i>
+                  </div>
+                  <h3 class="card-title">Ratón</h3>
+                </div>
+                <div class="settings-group">
+                  <div class="setting-item">
+                    <div>
+                      <div class="setting-label">Velocidad del puntero</div>
+                      <div class="setting-description">
+                        Controla qué tan rápido se mueve el cursor
+                      </div>
+                    </div>
+                    <div class="slider-container">
+                      <input type="range" class="range-slider" value="60" />
+                      <span class="slider-value">6</span>
+                    </div>
+                  </div>
+                  <div class="setting-item">
+                    <div
+                      class="toggle-switch active"
+                      onclick="toggleSwitch(this)"
+                    >
+                      <div class="toggle-knob"></div>
+                    </div>
+                    <div>
+                      <div class="setting-label">Aceleración natural</div>
+                      <div class="setting-description">
+                        Movimiento más natural del cursor
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-section" id="appearance" style="display: none">
+            <div class="section-header">
+              <h2 class="section-title">Apariencia</h2>
+              <p class="section-description">
+                Personaliza el aspecto visual del sistema
+              </p>
+            </div>
+
+            <div class="settings-grid">
+              <div class="settings-card">
+                <div class="card-header">
+                  <div class="card-icon">
+                    <i class="fas fa-moon"></i>
+                  </div>
+                  <h3 class="card-title">Tema</h3>
+                </div>
+                <div class="settings-group">
+                  <div class="appearance-grid">
+                    <div class="appearance-item active">
+                      <div class="appearance-icon">
+                        <i class="fas fa-moon"></i>
+                      </div>
+                      <div class="appearance-label">Oscuro</div>
+                    </div>
+                    <div class="appearance-item">
+                      <div class="appearance-icon">
+                        <i class="fas fa-sun"></i>
+                      </div>
+                      <div class="appearance-label">Claro</div>
+                    </div>
+                    <div class="appearance-item">
+                      <div class="appearance-icon">
+                        <i class="fas fa-adjust"></i>
+                      </div>
+                      <div class="appearance-label">Automático</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="settings-card">
+                <div class="card-header">
+                  <div class="card-icon">
+                    <i class="fas fa-fill-drip"></i>
+                  </div>
+                  <h3 class="card-title">Colores</h3>
+                </div>
+                <div class="settings-group">
+                  <div class="setting-item">
+                    <div>
+                      <div class="setting-label">Color de acento</div>
+                      <div class="setting-description">
+                        Color principal para controles y elementos
+                      </div>
+                    </div>
+                    <div class="color-picker">
+                      <div
+                        class="color-option active"
+                        style="background: #00ff9d"
+                      ></div>
+                      <div
+                        class="color-option"
+                        style="background: #007aff"
+                      ></div>
+                      <div
+                        class="color-option"
+                        style="background: #ff2d55"
+                      ></div>
+                      <div
+                        class="color-option"
+                        style="background: #ff9500"
+                      ></div>
+                      <div
+                        class="color-option"
+                        style="background: #5ac8fa"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="settings-card">
+                <div class="card-header">
+                  <div class="card-icon">
+                    <i class="fas fa-image"></i>
+                  </div>
+                  <h3 class="card-title">Fondo de pantalla</h3>
+                </div>
+                <div class="settings-group">
+                  <div class="appearance-grid">
+                    <div class="appearance-item active">
+                      <div class="appearance-icon">
+                        <i class="fas fa-mountain"></i>
+                      </div>
+                      <div class="appearance-label">Montañas</div>
+                    </div>
+                    <div class="appearance-item">
+                      <div class="appearance-icon">
+                        <i class="fas fa-wave-square"></i>
+                      </div>
+                      <div class="appearance-label">Ondas</div>
+                    </div>
+                    <div class="appearance-item">
+                      <div class="appearance-icon">
+                        <i class="fas fa-star"></i>
+                      </div>
+                      <div class="appearance-label">Estrellas</div>
+                    </div>
+                    <div class="appearance-item">
+                      <div class="appearance-icon">
+                        <i class="fas fa-plus"></i>
+                      </div>
+                      <div class="appearance-label">Personalizar</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-section" id="account" style="display: none">
+            <div class="section-header">
+              <h2 class="section-title">Mi Cuenta</h2>
+              <p class="section-description">
+                Administra tu perfil y preferencias de cuenta
+              </p>
+            </div>
+
+            <div class="account-card">
+              <div class="account-avatar">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="account-info">
+                <div class="account-name">Usuario Nova OS</div>
+                <div class="account-email">usuario@novaos.com</div>
+              </div>
+              <div class="account-actions">
+                <button class="btn">Editar perfil</button>
+                <button class="btn btn-primary">Cambiar avatar</button>
+              </div>
+            </div>
+
+            <div class="settings-grid">
+              <div class="settings-card">
+                <div class="card-header">
+                  <div class="card-icon">
+                    <i class="fas fa-shield-alt"></i>
+                  </div>
+                  <h3 class="card-title">Seguridad</h3>
+                </div>
+                <div class="settings-group">
+                  <div class="setting-item">
+                    <div
+                      class="toggle-switch active"
+                      onclick="toggleSwitch(this)"
+                    >
+                      <div class="toggle-knob"></div>
+                    </div>
+                    <div>
+                      <div class="setting-label">
+                        Autenticación de dos factores
+                      </div>
+                      <div class="setting-description">
+                        Requiere un segundo método de autenticación
+                      </div>
+                    </div>
+                  </div>
+                  <div class="setting-item">
+                    <div class="toggle-switch" onclick="toggleSwitch(this)">
+                      <div class="toggle-knob"></div>
+                    </div>
+                    <div>
+                      <div class="setting-label">
+                        Notificaciones de seguridad
+                      </div>
+                      <div class="setting-description">
+                        Recibe alertas sobre actividad sospechosa
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-section" id="privacy" style="display: none">
+            <div class="section-header">
+              <h2 class="section-title">Privacidad y Seguridad</h2>
+              <p class="section-description">
+                Controla qué información compartes y cómo se protege
+              </p>
+            </div>
+
+            <div class="privacy-grid">
+              <div class="privacy-item">
+                <div class="privacy-icon">
+                  <i class="fas fa-lock"></i>
+                </div>
+                <div class="privacy-info">
+                  <div class="privacy-title">Contraseñas</div>
+                  <div class="privacy-status">Gestión de credenciales</div>
+                </div>
+              </div>
+              <div class="privacy-item">
+                <div class="privacy-icon">
+                  <i class="fas fa-cookie"></i>
+                </div>
+                <div class="privacy-info">
+                  <div class="privacy-title">Cookies</div>
+                  <div class="privacy-status">Política de cookies activa</div>
+                </div>
+              </div>
+              <div class="privacy-item">
+                <div class="privacy-icon">
+                  <i class="fas fa-history"></i>
+                </div>
+                <div class="privacy-info">
+                  <div class="privacy-title">Historial</div>
+                  <div class="privacy-status">
+                    Borrado automático cada 30 días
+                  </div>
+                </div>
+              </div>
+              <div class="privacy-item">
+                <div class="privacy-icon">
+                  <i class="fas fa-bell-slash"></i>
+                </div>
+                <div class="privacy-info">
+                  <div class="privacy-title">Permisos</div>
+                  <div class="privacy-status">Gestionar permisos de apps</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-section" id="updates" style="display: none">
+            <div class="section-header">
+              <h2 class="section-title">Actualizaciones</h2>
+              <p class="section-description">
+                Mantén tu sistema actualizado con las últimas funciones
+              </p>
+            </div>
+
+            <div class="update-card">
+              <div class="update-icon">
+                <i class="fas fa-rocket"></i>
+              </div>
+              <h3 class="update-title">Nova OS está actualizado</h3>
+              <p class="update-description">
+                Tu sistema tiene la versión más reciente. Las actualizaciones se
+                instalan automáticamente para asegurar la mejor experiencia y
+                seguridad.
+              </p>
+              <button class="btn btn-primary">Buscar actualizaciones</button>
+            </div>
+
+            <div class="settings-grid" style="margin-top: 24px">
+              <div class="settings-card">
+                <div class="card-header">
+                  <div class="card-icon">
+                    <i class="fas fa-sync-alt"></i>
+                  </div>
+                  <h3 class="card-title">Actualizaciones automáticas</h3>
+                </div>
+                <div class="settings-group">
+                  <div class="setting-item">
+                    <div
+                      class="toggle-switch active"
+                      onclick="toggleSwitch(this)"
+                    >
+                      <div class="toggle-knob"></div>
+                    </div>
+                    <div>
+                      <div class="setting-label">Instalar automáticamente</div>
+                      <div class="setting-description">
+                        Instala actualizaciones en segundo plano
+                      </div>
+                    </div>
+                  </div>
+                  <div class="setting-item">
+                    <div
+                      class="toggle-switch active"
+                      onclick="toggleSwitch(this)"
+                    >
+                      <div class="toggle-knob"></div>
+                    </div>
+                    <div>
+                      <div class="setting-label">
+                        Solo actualizaciones de seguridad
+                      </div>
+                      <div class="setting-description">
+                        Instala solo parches críticos automáticamente
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function showSection(sectionId) {
+        document.querySelectorAll(".settings-section").forEach((section) => {
+          section.style.display = "none";
+        });
+
+        document.querySelectorAll(".sidebar-item").forEach((item) => {
+          item.classList.remove("active");
+        });
+
+        event.currentTarget.classList.add("active");
+        document.getElementById(sectionId).style.display = "block";
+      }
+
+      function toggleSwitch(element) {
+        element.classList.toggle("active");
+      }
+
+      document.querySelectorAll(".range-slider").forEach((slider) => {
+        slider.addEventListener("input", function () {
+          const value = parseInt(this.value);
+          const sliderValue = this.nextElementSibling;
+
+          if (slider.id.includes("speed")) {
+            const labels = [
+              "Muy lento",
+              "Lento",
+              "Media",
+              "Rápido",
+              "Muy rápido",
+            ];
+            sliderValue.textContent = labels[Math.floor(value / 20)];
+          } else {
+            sliderValue.textContent = value;
+          }
+        });
+      });
+
+      document.querySelectorAll(".color-option").forEach((option) => {
+        option.addEventListener("click", function () {
+          document.querySelectorAll(".color-option").forEach((opt) => {
+            opt.classList.remove("active");
+          });
+          this.classList.add("active");
+        });
+      });
+
+      document.querySelectorAll(".appearance-item").forEach((item) => {
+        item.addEventListener("click", function () {
+          const parent = this.parentElement;
+          parent.querySelectorAll(".appearance-item").forEach((i) => {
+            i.classList.remove("active");
+          });
+          this.classList.add("active");
+        });
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.querySelector(".search-input");
+        searchInput.addEventListener("focus", function () {
+          this.parentElement.style.width = "320px";
+        });
+
+        searchInput.addEventListener("blur", function () {
+          if (this.value === "") {
+            this.parentElement.style.width = "240px";
+          }
+        });
+      });
+    </script>
+  </body>
 </html>
