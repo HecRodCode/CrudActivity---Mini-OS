@@ -573,6 +573,12 @@ function abrirApp(url, titulo) {
   iframe.src = url;
   webOS.updateWindowTitle(titulo);
 
+  if (url.includes("calculator")) {
+    setTimeout(() => {
+      ajustarVentanaCalculadora();
+    }, 100);
+  }
+
   iframe.style.opacity = "0";
 
   setTimeout(() => {
@@ -582,6 +588,53 @@ function abrirApp(url, titulo) {
   }, 150);
 
   webOS.showNotification(`Aplicación "${titulo}" abierta`, "success");
+}
+
+function ajustarVentanaCalculadora() {
+  const container = document.querySelector(".app-window-container");
+  const iframe = document.getElementById("ventana-app");
+
+  if (!window.originalWindowStyle) {
+    window.originalWindowStyle = {
+      width: container.style.width,
+      height: container.style.height,
+      top: container.style.top,
+      left: container.style.left,
+      transform: container.style.transform,
+      borderRadius: container.style.borderRadius,
+    };
+  }
+
+  // Ajustes para la calculadora
+  container.style.width = "395px";
+  container.style.height = "580px";
+  container.style.top = "50px";
+  container.style.left = "500px";
+  container.style.transform = "none";
+  container.style.borderRadius = "16px";
+
+  iframe.style.width = "100%";
+  iframe.style.height = "100%";
+}
+
+function restaurarEstiloVentana() {
+  const container = document.querySelector(".app-window-container");
+
+  if (window.originalWindowStyle) {
+    container.style.width = window.originalWindowStyle.width;
+    container.style.height = window.originalWindowStyle.height;
+    container.style.top = window.originalWindowStyle.top;
+    container.style.left = window.originalWindowStyle.left;
+    container.style.transform = window.originalWindowStyle.transform;
+    container.style.borderRadius = window.originalWindowStyle.borderRadius;
+  } else {
+    container.style.width = "90%";
+    container.style.height = "75vh";
+    container.style.top = "50px";
+    container.style.left = "50%";
+    container.style.transform = "translateX(-50%)";
+    container.style.borderRadius = "16px";
+  }
 }
 
 /* Funciones de utilidad del sistema */
