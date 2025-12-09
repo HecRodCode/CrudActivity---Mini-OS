@@ -2,8 +2,15 @@ class WebOSNova {
   constructor() {
     this.init();
     this.quickSettingsVisible = false;
+    this.currentSong = null;
     this.musicPlaying = false;
     this.initQuickSettings();
+
+    window.addEventListener("message", (event) => {
+      if (event.data.type === "music") {
+        this.handleMusicMessage(event.data);
+      }
+    });
   }
 
   /* Inicialización del sistema */
@@ -106,6 +113,43 @@ class WebOSNova {
       error: "exclamation-circle",
     };
     return icons[type] || "info-circle";
+  }
+
+  /* Sistema de musica */
+  handleMusicMessage(data) {
+    if (data.action === "songChange") {
+      this.currentSong = {
+        file: data.songFile,
+        title: data.title,
+      };
+      this.updateMusicPanel(data.title, data.isPlaying);
+    } else if (data.action === "playState") {
+      this.musicPlaying = data.isPlaying;
+      this.updateMusicPanel(
+        this.currentSong ? this.currentSong.title : null,
+        data.isPlaying
+      );
+    }
+  }
+
+  updateMusicPanel(title, isPlaying) {
+    const musicTitle = document.querySelector(".music-info h4");
+    const musicArtist = document.querySelector(".music-artist");
+    const playIcon = document.getElementById("play-icon");
+
+    if (title) {
+      const parts = title.split(" - ");
+      musicTitle.textContent = parts[0] || title;
+      musicArtist.textContent = parts[1] || "";
+    }
+
+    if (isPlaying) {
+      playIcon.className = "fas fa-pause";
+    } else {
+      playIcon.className = "fas fa-play";
+    }
+
+    this.musicPlaying = isPlaying;
   }
 
   /* Event Listeners del sistema */
@@ -445,22 +489,40 @@ class WebOSNova {
     }
   }
 
-  /* Control de música */
   togglePlay() {
-    const playIcon = document.getElementById("play-icon");
-    this.musicPlaying = !this.musicPlaying;
+    const iframe = document.getElementById("ventana-app");
 
-    if (this.musicPlaying) {
-      playIcon.className = "fas fa-pause";
-      this.showNotification("Reproduciendo: The Edge Of Glory", "success");
+    if (iframe && iframe.src.includes("music.html") && iframe.contentWindow) {
+      try {
+        iframe.contentWindow.togglePlay();
+      } catch (e) {
+        const playIcon = document.getElementById("play-icon");
+        this.musicPlaying = !this.musicPlaying;
+
+        if (this.musicPlaying) {
+          playIcon.className = "fas fa-pause";
+          this.showNotification("Reproduciendo: The Edge Of Glory", "success");
+        } else {
+          playIcon.className = "fas fa-play";
+          this.showNotification("Música en pausa", "info");
+        }
+      }
     } else {
-      playIcon.className = "fas fa-play";
-      this.showNotification("Música en pausa", "info");
+      const playIcon = document.getElementById("play-icon");
+      this.musicPlaying = !this.musicPlaying;
+
+      if (this.musicPlaying) {
+        playIcon.className = "fas fa-pause";
+        this.showNotification("Reproduciendo: The Edge Of Glory", "success");
+      } else {
+        playIcon.className = "fas fa-play";
+        this.showNotification("Música en pausa", "info");
+      }
     }
   }
 
   openMusicApp() {
-    abrirApp("apps/musica.html", "Reproductor de Música");
+    abrirApp("apps/musica/music.html", "Reproductor de Música");
     this.hideQuickSettings();
   }
 }
