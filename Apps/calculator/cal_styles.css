@@ -1,101 +1,99 @@
+:root {
+  --color-1: #ffffff;
+  --color-2: #1a1c2c;
+}
+
 html,
 body {
-    padding-top: 80px;
-    background-color: var(--color-2);
-    max-width: 390px;
-    margin: 0 auto;    
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; 
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-2);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow: hidden;
+  position: relative;
 }
 
-.set-titles-font {
-    font-family: "SFPro", sans-serif; 
-    font-weight: normal;
-    font-size: 60px;
-    font-style: normal;
-    text-align: center;
-    color:#0d78f3
-}
-
-.set-subtitles-font {
-    font-family: "SFPro", sans-serif;
-    font-weight: normal;
-    font-size: 40px;
-    font-style: normal;
-    text-align: center;
-    color:var(--color-1)
-}
-
-.set-text-font {
-    font-weight: 100;
-    font-size: 30px;
-    font-style: normal;
-    text-align: center;
-    color:#000000
-}
-
-.color-1 {
-    color: #FFFFFF;
-}
-
-.color-2 {
-    color: #1A1C2C;
-}
-
-:root {
-    --color-1: #FFFFFF;
-    --color-2: #1A1C2C;
-}
-
-.text-area{
-    margin-top: 10px;
-    padding: 5px;
-    width:92%;
-    height:60px;
-    background-color:#1A1C2C;
-    color:white;
-    text-align:right;
-    
-    font-size:45px;
+.calculator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 390px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: var(--color-2);
 }
 
 .display {
-    width: 89%;
-    height: 60px;
-    background: black;
-    color: white;
-    font-size: 48px;
-    text-align: right;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    overflow: hidden;
+  width: 350px;
+  height: 80px;
+  background: black;
+  color: white;
+  font-size: 48px;
+  text-align: right;
+  padding: 0 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: none;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .calc {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  width: 350px;
 }
 
 .grey_but,
 .orange_but,
 .dark_but {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; 
-    border: none;
-    border-radius: 50%;
-    font-size: 20px;
-    color:white;
-    width: 70px;          
-    aspect-ratio: 1 / 1;  
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  color: white;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
 }
 
-.grey_but { background: #a5a5a5; color: black; }
-.dark_but { background: #333; }
-.orange_but { background: #ff9500; }
+.grey_but {
+  background: #a5a5a5;
+  color: black;
+}
 
-.calc button:hover{
-    background-color:  #c3c3c330;
+.dark_but {
+  background: #333;
+}
+
+.orange_but {
+  background: #ff9500;
+}
+
+.calc button:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.calc button:active {
+  transform: scale(0.95);
+}
+
+.color-1 {
+  color: #ffffff;
+}
+
+.color-2 {
+  color: #1a1c2c;
 }
