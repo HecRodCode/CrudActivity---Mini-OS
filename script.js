@@ -722,6 +722,35 @@ function openMusicApp() {
   if (webOS) webOS.openMusicApp();
 }
 
+function cambiarFondoPrincipal(urlFondo) {
+
+    document.body.style.backgroundImage = urlFondo;
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundPosition = "center";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundAttachment = "fixed";
+    
+
+    try {
+        localStorage.setItem('fondoEscritorio', urlFondo);
+    } catch (e) {
+        console.log("No se pudo guardar el fondo:", e);
+    }
+}
+window.addEventListener('message', function(event) {
+    
+    if (event.data && event.data.type === 'CAMBIAR_FONDO') {
+        cambiarFondoPrincipal(event.data.fondo);
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const fondoGuardado = localStorage.getItem('fondoEscritorio');
+    if (fondoGuardado) {
+        cambiarFondoPrincipal(fondoGuardado);
+    }
+});
+
 /* Inicialización del sistema */
 let webOS;
 document.addEventListener("DOMContentLoaded", () => {
