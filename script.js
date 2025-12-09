@@ -196,6 +196,10 @@ class WebOSNova {
     const container = document.querySelector(".app-window-container");
     const finderIcon = document.getElementById("finder-icon");
 
+    if (iframe.src.includes("calculator")) {
+      restaurarEstiloVentana();
+    }
+
     if (finderIcon) {
       finderIcon.classList.add("hidden");
     }

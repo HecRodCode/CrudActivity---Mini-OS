@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style_image.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=SF+Pro+Display:wght@300;400;500;600&display=swap"
+    />
+    <title>Fotos del Sistema</title>
+  </head>
+
+  <body>
+    <div class="app-window">
+      <header class="window-header">
+        <div class="header-action left-control">
+          <div class="zoom-controls">
+            <i class="fas fa-grip-horizontal"></i>
+            <i class="fas fa-minus"></i>
+            <input
+              type="range"
+              min="50"
+              max="300"
+              value="100"
+              id="zoomSlider"
+              class="zoom-slider"
+            />
+            <i class="fas fa-plus"></i>
+          </div>
+        </div>
+
+        <h1 class="window-title">5 Photos</h1>
+
+        <div class="search-bar right-action">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search" />
+        </div>
+      </header>
+
+      <div class="app-content">
+        <aside class="sidebar">
+          <nav>
+            <ul>
+              <h5>Photo</h5>
+              <li>
+                <a href="#"><i class="far fa-images"></i> Library</a>
+              </li>
+              <li>
+                <a href="#"><i class="far fa-map"></i> Map</a>
+              </li>
+              <li>
+                <a href="#"><i class="far fa-save"></i> Recently Save</a>
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="far fa-trash-alt"></i> Recently Deleted</a
+                >
+              </li>
+            </ul>
+          </nav>
+          <div class="sidebar-footer"></div>
+
+          <nav>
+            <ul>
+              <h5>Collection</h5>
+              <li>
+                <a href="#"><i class="far fa-clock"></i> Days</a>
+              </li>
+              <li>
+                <a href="#"><i class="far fa-user"></i> People</a>
+              </li>
+              <li>
+                <a href="#"><i class="far fa-play-circle"></i> Memories</a>
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-suitcase"></i> Trips</a>
+              </li>
+              <li>
+                <a href="#"><i class="far fa-image"></i> Featured Photos</a>
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-tools"></i> Utilies</a>
+              </li>
+              <li>
+                <a href="#"><i class="far fa-copy"></i> Media Types</a>
+              </li>
+              <li>
+                <a href="#"><i class="far fa-copy"></i> Albums</a>
+              </li>
+              <li>
+                <a href="#"><i class="far fa-copy"></i> Projects</a>
+              </li>
+            </ul>
+          </nav>
+          <div class="sidebar-footer"></div>
+
+          <nav>
+            <ul>
+              <h5>Sharing</h5>
+              <li>
+                <a href="#"><i class="far fa-copy"></i> Shared Albums</a>
+              </li>
+            </ul>
+          </nav>
+          <div class="sidebar-footer"></div>
+        </aside>
+
+        <main class="gallery-view">
+          <section class="Gallery-date-view">
+            <div class="header-content">
+              <h3>Library</h3>
+              <p>september 2024</p>
+            </div>
+          </section>
+
+          <section class="grid-image" id="galleryGrid">
+            <article class="card">
+              <img src="Apps/galery/1-1.svg" alt="Imagen del Sistema 1" />
+            </article>
+
+            <article class="card">
+              <img src="Apps/galery/2-2.svg" alt="Imagen del Sistema 2" />
+            </article>
+
+            <article class="card">
+              <img src="Apps/galery/3-3.svg" alt="Imagen del Sistema 3" />
+            </article>
+
+            <article class="card">
+              <img src="Apps/galery/4-4.svg" alt="Imagen del Sistema 4" />
+            </article>
+
+            <article class="card">
+              <img src="Apps/galery/5-5.svg" alt="Imagen del Sistema 5" />
+            </article>
+          </section>
+        </main>
+      </div>
+    </div>
+    <script>
+      const slider = document.getElementById("zoomSlider");
+      const grid = document.getElementById("galleryGrid");
+
+      slider.addEventListener("input", function () {
+        const zoomValue = this.value;
+        const baseSize = 2;
+        const newSize = `calc(${baseSize} * ${zoomValue / 100} * 100px)`;
+        grid.style.setProperty("--card-size", newSize);
+      });
+    </script>
+  </body>
+</html>

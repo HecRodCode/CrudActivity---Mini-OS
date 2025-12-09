@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=SF+Pro+Display:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>Juegos - Nova OS</title>
+    <link rel="stylesheet" href="juegos.css" />
+  </head>
+  <body>
+    <div class="games-app" id="gamesApp">
+      <header class="games-header">
+        <div class="header-title">
+          <i class="fas fa-gamepad"></i>
+          <span>Juegos</span>
+        </div>
+
+        <div class="header-actions">
+          <button
+            class="header-btn"
+            onclick="showGamesList()"
+            id="backBtn"
+            style="display: none"
+          >
+            <i class="fas fa-arrow-left"></i>
+            Atrás
+          </button>
+          <button
+            class="header-btn"
+            onclick="toggleFullscreen()"
+            id="fullscreenBtn"
+          >
+            <i class="fas fa-expand"></i>
+            Pantalla completa
+          </button>
+        </div>
+      </header>
+
+      <div class="games-main" id="gamesMain">
+        <aside class="games-sidebar" id="gamesSidebar">
+          <div class="sidebar-section">
+            <div class="sidebar-title">Categorías</div>
+            <ul class="game-category">
+              <li class="category-item active" onclick="showCategory('all')">
+                <i class="fas fa-gamepad"></i>
+                <span>Todos los juegos</span>
+              </li>
+              <li class="category-item" onclick="showCategory('action')">
+                <i class="fas fa-fist-raised"></i>
+                <span>Acción</span>
+              </li>
+              <li class="category-item" onclick="showCategory('classic')">
+                <i class="fas fa-history"></i>
+                <span>Clásicos</span>
+              </li>
+              <li class="category-item" onclick="showCategory('upcoming')">
+                <i class="fas fa-clock"></i>
+                <span>Próximamente</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="sidebar-section">
+            <div class="sidebar-title">Información</div>
+            <ul class="game-category">
+              <li class="category-item">
+                <i class="fas fa-chart-line"></i>
+                <span>Estadísticas</span>
+              </li>
+              <li class="category-item">
+                <i class="fas fa-cog"></i>
+                <span>Configuración</span>
+              </li>
+              <li class="category-item">
+                <i class="fas fa-question-circle"></i>
+                <span>Ayuda</span>
+              </li>
+            </ul>
+          </div>
+        </aside>
+
+        <div class="game-area">
+          <div class="game-banner" id="gameBanner">
+            <div class="game-icon-large">
+              <i class="fas fa-skull-crossbones"></i>
+            </div>
+            <div class="game-info-large">
+              <h1 class="game-title">DOOM Classic</h1>
+              <p class="game-description">
+                El clásico juego de acción en primera persona que revolucionó el
+                género.
+              </p>
+              <div class="game-meta">
+                <span><i class="fas fa-clock"></i> 1993</span>
+                <span><i class="fas fa-user"></i> 1 jugador</span>
+                <span><i class="fas fa-star"></i> Clásico</span>
+              </div>
+            </div>
+            <button class="game-action" onclick="playDoom()">
+              <i class="fas fa-play"></i>
+              Jugar Ahora
+            </button>
+          </div>
+
+          <div class="games-list-view" id="gamesListView">
+            <div class="game-card" onclick="playDoom()">
+              <div class="game-card-icon doom-icon">
+                <i class="fas fa-skull-crossbones"></i>
+              </div>
+              <h3 class="game-card-title">DOOM Classic</h3>
+              <p class="game-card-desc">Juego de acción FPS clásico de 1993</p>
+              <div class="game-meta" style="font-size: 10px; gap: 8px">
+                <span><i class="fas fa-clock"></i> 1993</span>
+                <span><i class="fas fa-star"></i> Clásico</span>
+              </div>
+            </div>
+
+            <div class="game-card" onclick="showComingSoon()">
+              <div class="game-card-icon coming-soon-icon">
+                <i class="fas fa-question"></i>
+              </div>
+              <h3 class="game-card-title">Mystery Game</h3>
+              <p class="game-card-desc">Próximamente en Nova OS</p>
+              <div class="game-meta" style="font-size: 10px">
+                <span><i class="fas fa-clock"></i> Próximo</span>
+              </div>
+            </div>
+
+            <div class="game-card" onclick="showComingSoon()">
+              <div class="game-card-icon coming-soon-icon">
+                <i class="fas fa-ghost"></i>
+              </div>
+              <h3 class="game-card-title">Ghost Castle</h3>
+              <p class="game-card-desc">Aventura de terror en desarrollo</p>
+              <div class="game-meta" style="font-size: 10px">
+                <span><i class="fas fa-clock"></i> Próximo</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="game-container" id="gameContainer" style="display: none">
+            <div class="game-loading" id="gameLoading">
+              <div class="loading-spinner"></div>
+              <div class="loading-text">Cargando DOOM...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-controls" id="gameControls" style="display: none">
+        <button class="control-btn" onclick="pauseGame()">
+          <i class="fas fa-pause"></i>
+          Pausa
+        </button>
+        <button class="control-btn" onclick="restartGame()">
+          <i class="fas fa-redo"></i>
+          Reiniciar
+        </button>
+        <button class="control-btn primary" onclick="showGamesList()">
+          <i class="fas fa-times"></i>
+          Salir del juego
+        </button>
+
+        <div class="game-stats">
+          <div class="stat">
+            <div class="stat-value" id="gameTime">00:00</div>
+            <div class="stat-label">Tiempo</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value" id="gameStatus">Activo</div>
+            <div class="stat-label">Estado</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let gameIframe = null;
+      let gameTimer = 0;
+      let timerInterval = null;
+      let isGameActive = false;
+
+      function playDoom() {
+        const app = document.getElementById("gamesApp");
+        const banner = document.getElementById("gameBanner");
+        const listView = document.getElementById("gamesListView");
+        const gameContainer = document.getElementById("gameContainer");
+        const gameLoading = document.getElementById("gameLoading");
+        const gameControls = document.getElementById("gameControls");
+        const backBtn = document.getElementById("backBtn");
+        const fullscreenBtn = document.getElementById("fullscreenBtn");
+
+        app.classList.add("game-active");
+        banner.style.display = "none";
+        listView.style.display = "none";
+        gameContainer.style.display = "block";
+        gameControls.style.display = "flex";
+        backBtn.style.display = "flex";
+        fullscreenBtn.style.display = "none";
+
+        isGameActive = true;
+
+        gameLoading.style.display = "flex";
+
+        setTimeout(() => {
+          if (gameIframe) {
+            gameIframe.remove();
+          }
+
+          gameIframe = document.createElement("iframe");
+          gameIframe.className = "game-frame";
+          gameIframe.src = "../doom/doom.html";
+          gameIframe.title = "DOOM Classic";
+          gameIframe.allow = "fullscreen";
+
+          gameIframe.onload = () => {
+            gameLoading.style.display = "none";
+            startGameTimer();
+
+            if (window.parent && window.parent.webOS) {
+              window.parent.webOS.showNotification(
+                "DOOM Classic iniciado",
+                "success"
+              );
+            }
+          };
+
+          gameIframe.onerror = () => {
+            gameLoading.innerHTML = `
+                        <div style="text-align: center;">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 48px; color: #ff6b6b; margin-bottom: 16px;"></i>
+                            <div class="loading-text" style="color: #ff6b6b; margin-bottom: 16px;">Error al cargar DOOM</div>
+                            <p style="color: var(--text-secondary); font-size: 12px; margin-bottom: 20px;">
+                                Asegúrate de que el archivo exista en: ../doom/doom.html
+                            </p>
+                            <button onclick="playDoom()" style="background: var(--accent-primary); color: var(--bg-primary); border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600;">
+                                <i class="fas fa-redo"></i> Reintentar
+                            </button>
+                        </div>
+                    `;
+          };
+
+          gameContainer.appendChild(gameIframe);
+        }, 500);
+      }
+
+      function showGamesList() {
+        const app = document.getElementById("gamesApp");
+        const banner = document.getElementById("gameBanner");
+        const listView = document.getElementById("gamesListView");
+        const gameContainer = document.getElementById("gameContainer");
+        const gameControls = document.getElementById("gameControls");
+        const backBtn = document.getElementById("backBtn");
+        const fullscreenBtn = document.getElementById("fullscreenBtn");
+
+        app.classList.remove("game-active");
+        banner.style.display = "flex";
+        listView.style.display = "grid";
+        gameContainer.style.display = "none";
+        gameControls.style.display = "none";
+        backBtn.style.display = "none";
+        fullscreenBtn.style.display = "flex";
+
+        isGameActive = false;
+
+        if (gameIframe) {
+          gameIframe.remove();
+          gameIframe = null;
+        }
+
+        stopGameTimer();
+
+        if (window.parent && window.parent.webOS) {
+          window.parent.webOS.showNotification("Juego finalizado", "info");
+        }
+      }
+
+      function startGameTimer() {
+        stopGameTimer();
+        gameTimer = 0;
+        updateTimerDisplay();
+
+        timerInterval = setInterval(() => {
+          gameTimer++;
+          updateTimerDisplay();
+        }, 1000);
+      }
+
+      function stopGameTimer() {
+        if (timerInterval) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+        }
+      }
+
+      function updateTimerDisplay() {
+        const minutes = Math.floor(gameTimer / 60);
+        const seconds = gameTimer % 60;
+        document.getElementById("gameTime").textContent = `${minutes
+          .toString()
+          .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+      }
+
+      function toggleFullscreen() {
+        const gameContainer = document.getElementById("gameContainer");
+        const fullscreenBtn = document.getElementById("fullscreenBtn");
+
+        if (!document.fullscreenElement) {
+          const element = isGameActive
+            ? gameContainer
+            : document.documentElement;
+
+          if (element.requestFullscreen) {
+            element.requestFullscreen();
+          } else if (element.webkitRequestFullscreen) {
+            element.webkitRequestFullscreen();
+          } else if (element.msRequestFullscreen) {
+            element.msRequestFullscreen();
+          }
+
+          fullscreenBtn.innerHTML =
+            '<i class="fas fa-compress"></i> Salir pantalla completa';
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+          }
+
+          fullscreenBtn.innerHTML =
+            '<i class="fas fa-expand"></i> Pantalla completa';
+        }
+      }
+
+      document.addEventListener("fullscreenchange", updateFullscreenButton);
+      document.addEventListener(
+        "webkitfullscreenchange",
+        updateFullscreenButton
+      );
+      document.addEventListener("msfullscreenchange", updateFullscreenButton);
+
+      function updateFullscreenButton() {
+        const isFullscreen =
+          !!document.fullscreenElement ||
+          !!document.webkitFullscreenElement ||
+          !!document.msFullscreenElement;
+        const fullscreenBtn = document.getElementById("fullscreenBtn");
+
+        if (isFullscreen) {
+          fullscreenBtn.innerHTML =
+            '<i class="fas fa-compress"></i> Salir pantalla completa';
+        } else {
+          fullscreenBtn.innerHTML =
+            '<i class="fas fa-expand"></i> Pantalla completa';
+        }
+      }
+
+      function pauseGame() {
+        if (gameIframe && gameIframe.contentWindow) {
+          try {
+            gameIframe.contentWindow.postMessage("pause", "*");
+          } catch (e) {
+            console.log("No se pudo pausar el juego");
+          }
+        }
+      }
+
+      function restartGame() {
+        if (gameIframe) {
+          gameIframe.src = gameIframe.src;
+          startGameTimer();
+        }
+      }
+
+      function showCategory(category) {
+        document.querySelectorAll(".category-item").forEach((item) => {
+          item.classList.remove("active");
+        });
+        event.currentTarget.classList.add("active");
+
+        console.log("Mostrar categoría:", category);
+      }
+
+      function showComingSoon() {
+        if (window.parent && window.parent.webOS) {
+          window.parent.webOS.showNotification(
+            "Más juegos próximamente...",
+            "info"
+          );
+        }
+
+        alert(
+          "🎮 ¡Más juegos vienen en camino!\n\nEstamos trabajando en traer más clásicos a Nova OS."
+        );
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        console.log("App de juegos cargada");
+
+        document.getElementById("gameStatus").textContent = "Inactivo";
+      });
+
+      window.addEventListener("message", function (event) {
+        console.log("Mensaje del juego:", event.data);
+
+        if (event.data === "gameOver" || event.data === "levelComplete") {
+          if (window.parent && window.parent.webOS) {
+            window.parent.webOS.showNotification("DOOM: " + event.data, "info");
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
