@@ -11,8 +11,8 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=SF+Pro+Display:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
-    <title>Juegos - Nova OS</title>
     <link rel="stylesheet" href="juegos.css" />
+    <title>Juegos - Nova OS</title>
   </head>
   <body>
     <div class="games-app" id="gamesApp">
@@ -52,17 +52,17 @@
                 <i class="fas fa-gamepad"></i>
                 <span>Todos los juegos</span>
               </li>
-              <li class="category-item" onclick="showCategory('action')">
-                <i class="fas fa-fist-raised"></i>
-                <span>Acción</span>
-              </li>
               <li class="category-item" onclick="showCategory('classic')">
                 <i class="fas fa-history"></i>
                 <span>Clásicos</span>
               </li>
-              <li class="category-item" onclick="showCategory('upcoming')">
-                <i class="fas fa-clock"></i>
-                <span>Próximamente</span>
+              <li class="category-item" onclick="showCategory('arcade')">
+                <i class="fas fa-joystick"></i>
+                <span>Arcade</span>
+              </li>
+              <li class="category-item" onclick="showCategory('puzzle')">
+                <i class="fas fa-puzzle-piece"></i>
+                <span>Puzzle</span>
               </li>
             </ul>
           </div>
@@ -89,66 +89,121 @@
         <div class="game-area">
           <div class="game-banner" id="gameBanner">
             <div class="game-icon-large">
-              <i class="fas fa-skull-crossbones"></i>
+              <i class="fas fa-cube"></i>
             </div>
             <div class="game-info-large">
-              <h1 class="game-title">DOOM Classic</h1>
+              <h1 class="game-title">Minecraft Classic</h1>
               <p class="game-description">
-                El clásico juego de acción en primera persona que revolucionó el
-                género.
+                La versión original de Minecraft en el navegador. ¡Construye,
+                explora y crea!
               </p>
               <div class="game-meta">
-                <span><i class="fas fa-clock"></i> 1993</span>
+                <span><i class="fas fa-clock"></i> 2009</span>
                 <span><i class="fas fa-user"></i> 1 jugador</span>
                 <span><i class="fas fa-star"></i> Clásico</span>
               </div>
             </div>
-            <button class="game-action" onclick="playDoom()">
+            <button class="game-action" onclick="playMinecraft()">
               <i class="fas fa-play"></i>
               Jugar Ahora
             </button>
           </div>
 
           <div class="games-list-view" id="gamesListView">
+            <div class="game-card" onclick="playMinecraft()">
+              <div class="game-card-icon minecraft-icon">
+                <i class="fas fa-cube"></i>
+              </div>
+              <h3 class="game-card-title">Minecraft Classic</h3>
+              <p class="game-card-desc">Construcción creativa en 3D</p>
+              <div class="game-meta" style="font-size: 10px; gap: 8px">
+                <span><i class="fas fa-clock"></i> 2009</span>
+                <span><i class="fas fa-star"></i> Clásico</span>
+              </div>
+            </div>
+
+            <!-- DOOM -->
             <div class="game-card" onclick="playDoom()">
               <div class="game-card-icon doom-icon">
                 <i class="fas fa-skull-crossbones"></i>
               </div>
               <h3 class="game-card-title">DOOM Classic</h3>
-              <p class="game-card-desc">Juego de acción FPS clásico de 1993</p>
+              <p class="game-card-desc">FPS clásico de acción</p>
               <div class="game-meta" style="font-size: 10px; gap: 8px">
                 <span><i class="fas fa-clock"></i> 1993</span>
-                <span><i class="fas fa-star"></i> Clásico</span>
+                <span><i class="fas fa-star"></i> Acción</span>
               </div>
             </div>
 
-            <div class="game-card" onclick="showComingSoon()">
-              <div class="game-card-icon coming-soon-icon">
-                <i class="fas fa-question"></i>
-              </div>
-              <h3 class="game-card-title">Mystery Game</h3>
-              <p class="game-card-desc">Próximamente en Nova OS</p>
-              <div class="game-meta" style="font-size: 10px">
-                <span><i class="fas fa-clock"></i> Próximo</span>
-              </div>
-            </div>
-
-            <div class="game-card" onclick="showComingSoon()">
-              <div class="game-card-icon coming-soon-icon">
+            <!-- Pac-Man -->
+            <div class="game-card" onclick="playPacman()">
+              <div class="game-card-icon pacman-icon">
                 <i class="fas fa-ghost"></i>
               </div>
-              <h3 class="game-card-title">Ghost Castle</h3>
-              <p class="game-card-desc">Aventura de terror en desarrollo</p>
-              <div class="game-meta" style="font-size: 10px">
-                <span><i class="fas fa-clock"></i> Próximo</span>
+              <h3 class="game-card-title">Pac-Man</h3>
+              <p class="game-card-desc">Come puntos, evita fantasmas</p>
+              <div class="game-meta" style="font-size: 10px; gap: 8px">
+                <span><i class="fas fa-clock"></i> 1980</span>
+                <span><i class="fas fa-star"></i> Arcade</span>
+              </div>
+            </div>
+
+            <!-- Tetris -->
+            <div class="game-card" onclick="playTetris()">
+              <div class="game-card-icon tetris-icon">
+                <i class="fas fa-gamepad"></i>
+              </div>
+              <h3 class="game-card-title">Tetris</h3>
+              <p class="game-card-desc">Juego de bloques ruso</p>
+              <div class="game-meta" style="font-size: 10px; gap: 8px">
+                <span><i class="fas fa-clock"></i> 1984</span>
+                <span><i class="fas fa-star"></i> Puzzle</span>
+              </div>
+            </div>
+
+            <!-- Snake -->
+            <div class="game-card" onclick="playSnake()">
+              <div class="game-card-icon snake-icon">
+                <i class="fas fa-snake"></i>
+              </div>
+              <h3 class="game-card-title">Snake</h3>
+              <p class="game-card-desc">Controla la serpiente hambrienta</p>
+              <div class="game-meta" style="font-size: 10px; gap: 8px">
+                <span><i class="fas fa-clock"></i> 1976</span>
+                <span><i class="fas fa-star"></i> Arcade</span>
+              </div>
+            </div>
+
+            <!-- Space Invaders -->
+            <div class="game-card" onclick="playSpaceInvaders()">
+              <div class="game-card-icon space-icon">
+                <i class="fas fa-space-shuttle"></i>
+              </div>
+              <h3 class="game-card-title">Space Invaders</h3>
+              <p class="game-card-desc">Defiende la Tierra</p>
+              <div class="game-meta" style="font-size: 10px; gap: 8px">
+                <span><i class="fas fa-clock"></i> 1978</span>
+                <span><i class="fas fa-star"></i> Arcade</span>
+              </div>
+            </div>
+
+            <!-- Chess -->
+            <div class="game-card" onclick="playChess()">
+              <div class="game-card-icon chess-icon">
+                <i class="fas fa-chess"></i>
+              </div>
+              <h3 class="game-card-title">Ajedrez</h3>
+              <p class="game-card-desc">Juego de estrategia clásico</p>
+              <div class="game-meta" style="font-size: 10px; gap: 8px">
+                <span><i class="fas fa-clock"></i> Siglo VI</span>
+                <span><i class="fas fa-star"></i> Estrategia</span>
               </div>
             </div>
           </div>
-
           <div class="game-container" id="gameContainer" style="display: none">
             <div class="game-loading" id="gameLoading">
               <div class="loading-spinner"></div>
-              <div class="loading-text">Cargando DOOM...</div>
+              <div class="loading-text">Cargando juego...</div>
             </div>
           </div>
         </div>
@@ -186,8 +241,108 @@
       let gameTimer = 0;
       let timerInterval = null;
       let isGameActive = false;
+      let currentGame = null;
+
+      // Juegos disponibles
+      const games = {
+        minecraft: {
+          url: "https://classic.minecraft.net",
+          title: "Minecraft Classic",
+          description:
+            "La versión original de Minecraft en el navegador. ¡Construye, explora y crea!",
+          year: "2009",
+          category: "classic",
+          controls: "WASD: Movimiento, Click: Colocar bloque, Espacio: Saltar",
+        },
+        doom: {
+          url: "../doom/doom.html",
+          title: "DOOM Classic",
+          description:
+            "El clásico juego de acción en primera persona que revolucionó el género.",
+          year: "1993",
+          category: "classic",
+          controls: "Flechas: Movimiento, Ctrl: Disparar, Espacio: Acción",
+        },
+        pacman: {
+          url: "https://freepacman.org",
+          title: "Pac-Man",
+          description:
+            "El clásico juego de arcade. Come todos los puntos mientras evitas a los fantasmas.",
+          year: "1980",
+          category: "arcade",
+          controls: "Flechas: Movimiento",
+        },
+        tetris: {
+          url: "https://tetris.com/play-tetris",
+          title: "Tetris",
+          description:
+            "El legendario juego de bloques rusos. Rota y coloca las piezas para formar líneas.",
+          year: "1984",
+          category: "puzzle",
+          controls: "Flechas: Mover y rotar, Espacio: Bajar rápido",
+        },
+        snake: {
+          url: "https://playsnake.org",
+          title: "Snake",
+          description:
+            "Controla una serpiente hambrienta. Come la comida y crece, pero no te muerdas a ti mismo.",
+          year: "1976",
+          category: "arcade",
+          controls: "Flechas: Dirección",
+        },
+        spaceinvaders: {
+          url: "https://freeinvaders.org",
+          title: "Space Invaders",
+          description:
+            "Defiende la Tierra de una invasión alienígena. Dispara a los invasores del espacio.",
+          year: "1978",
+          category: "arcade",
+          controls: "Flechas: Movimiento, Espacio: Disparar",
+        },
+        chess: {
+          url: "https://www.chess.com/play/computer",
+          title: "Ajedrez",
+          description:
+            "El juego de estrategia más famoso del mundo. Juega contra la computadora.",
+          year: "Siglo VI",
+          category: "strategy",
+          controls: "Mouse: Seleccionar y mover piezas",
+        },
+      };
+
+      function playMinecraft() {
+        openGame("minecraft");
+      }
 
       function playDoom() {
+        openGame("doom");
+      }
+
+      function playPacman() {
+        openGame("pacman");
+      }
+
+      function playTetris() {
+        openGame("tetris");
+      }
+
+      function playSnake() {
+        openGame("snake");
+      }
+
+      function playSpaceInvaders() {
+        openGame("spaceinvaders");
+      }
+
+      // Función para jugar Ajedrez
+      function playChess() {
+        openGame("chess");
+      }
+
+      function openGame(gameId) {
+        const game = games[gameId];
+        if (!game) return;
+
         const app = document.getElementById("gamesApp");
         const banner = document.getElementById("gameBanner");
         const listView = document.getElementById("gamesListView");
@@ -196,6 +351,10 @@
         const gameControls = document.getElementById("gameControls");
         const backBtn = document.getElementById("backBtn");
         const fullscreenBtn = document.getElementById("fullscreenBtn");
+        const gameTitle = document.querySelector(".game-title");
+        const gameDescription = document.querySelector(".game-description");
+        const gameIcon = document.querySelector(".game-icon-large");
+        const gameMeta = document.querySelector(".game-meta");
 
         app.classList.add("game-active");
         banner.style.display = "none";
@@ -205,9 +364,29 @@
         backBtn.style.display = "flex";
         fullscreenBtn.style.display = "none";
 
+        currentGame = gameId;
         isGameActive = true;
 
+        if (gameTitle) gameTitle.textContent = game.title;
+        if (gameDescription) gameDescription.textContent = game.description;
+
+        if (gameIcon) {
+          gameIcon.innerHTML = `<i class="fas fa-${getGameIcon(gameId)}"></i>`;
+          gameIcon.style.background = getGameGradient(gameId);
+        }
+
+        if (gameMeta) {
+          gameMeta.innerHTML = `
+                    <span><i class="fas fa-clock"></i> ${game.year}</span>
+                    <span><i class="fas fa-user"></i> 1 jugador</span>
+                    <span><i class="fas fa-star"></i> ${game.category}</span>
+                `;
+        }
+
         gameLoading.style.display = "flex";
+        gameLoading.querySelector(
+          ".loading-text"
+        ).textContent = `Cargando ${game.title}...`;
 
         setTimeout(() => {
           if (gameIframe) {
@@ -216,9 +395,10 @@
 
           gameIframe = document.createElement("iframe");
           gameIframe.className = "game-frame";
-          gameIframe.src = "../doom/doom.html";
-          gameIframe.title = "DOOM Classic";
+          gameIframe.src = game.url;
+          gameIframe.title = game.title;
           gameIframe.allow = "fullscreen";
+          gameIframe.referrerpolicy = "no-referrer";
 
           gameIframe.onload = () => {
             gameLoading.style.display = "none";
@@ -226,7 +406,7 @@
 
             if (window.parent && window.parent.webOS) {
               window.parent.webOS.showNotification(
-                "DOOM Classic iniciado",
+                `${game.title} iniciado`,
                 "success"
               );
             }
@@ -236,19 +416,50 @@
             gameLoading.innerHTML = `
                         <div style="text-align: center;">
                             <i class="fas fa-exclamation-triangle" style="font-size: 48px; color: #ff6b6b; margin-bottom: 16px;"></i>
-                            <div class="loading-text" style="color: #ff6b6b; margin-bottom: 16px;">Error al cargar DOOM</div>
+                            <div class="loading-text" style="color: #ff6b6b; margin-bottom: 16px;">Error al cargar ${game.title}</div>
                             <p style="color: var(--text-secondary); font-size: 12px; margin-bottom: 20px;">
-                                Asegúrate de que el archivo exista en: ../doom/doom.html
+                                El juego podría no estar disponible temporalmente.
                             </p>
-                            <button onclick="playDoom()" style="background: var(--accent-primary); color: var(--bg-primary); border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600;">
-                                <i class="fas fa-redo"></i> Reintentar
-                            </button>
+                            <div style="display: flex; gap: 10px; justify-content: center;">
+                                <button onclick="openGame('${gameId}')" style="background: var(--accent-primary); color: var(--bg-primary); border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600;">
+                                    <i class="fas fa-redo"></i> Reintentar
+                                </button>
+                                <button onclick="window.open('${game.url}', '_blank')" style="background: transparent; color: var(--text-primary); border: 1px solid var(--border-color); padding: 8px 16px; border-radius: 6px; cursor: pointer;">
+                                    <i class="fas fa-external-link-alt"></i> Abrir en nueva pestaña
+                                </button>
+                            </div>
                         </div>
                     `;
           };
 
           gameContainer.appendChild(gameIframe);
         }, 500);
+      }
+
+      function getGameIcon(gameId) {
+        const icons = {
+          minecraft: "cube",
+          doom: "skull-crossbones",
+          pacman: "ghost",
+          tetris: "gamepad",
+          snake: "snake",
+          spaceinvaders: "space-shuttle",
+          chess: "chess",
+        };
+        return icons[gameId] || "gamepad";
+      }
+
+      function getGameGradient(gameId) {
+        const gradients = {
+          minecraft: "linear-gradient(135deg, #6cc24a 0%, #4a8c2c 100%)",
+          doom: "linear-gradient(135deg, #ff4757 0%, #ff6b81 100%)",
+          pacman: "linear-gradient(135deg, #ffd166 0%, #ffb347 100%)",
+          tetris: "linear-gradient(135deg, #4cc9f0 0%, #4361ee 100%)",
+          snake: "linear-gradient(135deg, #2ecc71 0%, #27ae60 100%)",
+          spaceinvaders: "linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%)",
+          chess: "linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%)",
+        };
+        return gradients[gameId] || "var(--gradient-primary)";
       }
 
       function showGamesList() {
@@ -375,7 +586,7 @@
       }
 
       function restartGame() {
-        if (gameIframe) {
+        if (gameIframe && currentGame) {
           gameIframe.src = gameIframe.src;
           startGameTimer();
         }
@@ -387,20 +598,31 @@
         });
         event.currentTarget.classList.add("active");
 
-        console.log("Mostrar categoría:", category);
+        const gameCards = document.querySelectorAll(".game-card");
+        gameCards.forEach((card) => {
+          const gameTitle = card.querySelector(".game-card-title").textContent;
+          const game = Object.values(games).find((g) => g.title === gameTitle);
+
+          if (category === "all" || (game && game.category === category)) {
+            card.style.display = "flex";
+          } else {
+            card.style.display = "none";
+          }
+        });
       }
 
-      function showComingSoon() {
-        if (window.parent && window.parent.webOS) {
-          window.parent.webOS.showNotification(
-            "Más juegos próximamente...",
-            "info"
-          );
-        }
+      function formatTime(seconds) {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const secs = seconds % 60;
 
-        alert(
-          "🎮 ¡Más juegos vienen en camino!\n\nEstamos trabajando en traer más clásicos a Nova OS."
-        );
+        if (hours > 0) {
+          return `${hours}h ${minutes}m ${secs}s`;
+        } else if (minutes > 0) {
+          return `${minutes}m ${secs}s`;
+        } else {
+          return `${secs}s`;
+        }
       }
 
       document.addEventListener("DOMContentLoaded", function () {
@@ -414,7 +636,10 @@
 
         if (event.data === "gameOver" || event.data === "levelComplete") {
           if (window.parent && window.parent.webOS) {
-            window.parent.webOS.showNotification("DOOM: " + event.data, "info");
+            window.parent.webOS.showNotification(
+              "Juego: " + event.data,
+              "info"
+            );
           }
         }
       });
