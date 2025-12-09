@@ -1,161 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <base href="/CrudActivity---Mini-OS/">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <link
-                rel="stylesheet"
-                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-            />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=SF+Pro+Display:wght@300;400;500;600&display=swap"
-            rel="stylesheet"
-        />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=SF+Pro+Display:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
 
-        <title>Nova Music</title>
-        <link rel="stylesheet" href="Apps/music/music_styles.css">
-    </head>
-    <body>
-        <div id="musicWindow">
-            <div id="titleBar">
-                <h3>Music Library</h3>
-            </div>
+    <title>Nova Music</title>
+    <link rel="stylesheet" href="music_styles.css" />
+  </head>
+  <body>
+    <div id="musicWindow">
+      <div id="titleBar">
+        <h3>Music Library</h3>
+      </div>
 
-            <div id="mainArea">
-
-                <div id="sidebar">
-                    <h4>Playlists</h4>
-                    <p>Favorites</p>
-                    <ul id="favoritesList"></ul>
-                    <p>Chill</p>
-                    <p>Top Songs</p>
-                </div>
-
-                <div id="albumGrid">
-                    <div class="albumBox">
-                        <div class="songBox" onclick="playAlbum('song1.mp3', 'The Edge of Glory - Lady Gaga')">
-                            <img src="Apps/music/born_this_way.jpeg" class="albumImg">
-                            <p>The Edge of Glory Lady Gaga</p>
-                        </div>
-                        <button class="favorite" onclick="addFavorite('song1.mp3','The Edge of Glory')"></button>
-
-                    </div>
-
-                    <div class="albumBox">
-                        <div class="songBox" onclick="playAlbum('song2.mp3', 'Afgan K - Yeico X Toni')">
-                            <img src="Apps/music/afgan_k.jpeg" class="albumImg">
-                            <p>Afgan K <br>Yeico X Toni</p>
-                        </div>
-                        <button class="favorite" onclick="addFavorite('song2.mp3','Afgan K')"></button>
-                    </div>
-
-                    <div class="albumBox">
-                        
-                        <div class="songBox" onclick="playAlbum('song3.mp3', 'Cariñito - Rodolfo Aicardi')">
-                            <img src="Apps/music/rodolfo.jpeg" class="albumImg">
-                            <p>Cariñito <br>Rodolfo Aicardi</p>
-                        </div>
-                        <button class="favorite" onclick="addFavorite('song3.mp3','Cariñito')"></button>
-                        
-                    </div>
-                </div>
-
-            </div>
-
-            <div id="playerBar">
-                <button onclick="playPrev()">⏮</button>
-                <button onclick="togglePlay()">⏯</button>
-                <button onclick="playNext()">⏭</button>
-
-                <input id="volumeSlider" type="range" min="0" max="1" step="0.01" value="1">
-
-                <span id="songName">No song playing</span>
-            </div>
-            <audio id="audioPlayer"></audio>
+      <div id="mainArea">
+        <div id="sidebar">
+          <h4>Playlists</h4>
+          <p>Favorites</p>
+          <ul id="favoritesList"></ul>
+          <p>Chill</p>
+          <p>Top Songs</p>
         </div>
 
-        <script>
+        <div id="albumGrid">
+          <div class="albumBox">
+            <div
+              class="songBox"
+              onclick="playAlbum('./songs/Lady Gaga - The Edge Of Glory.mp3', 'The Edge of Glory - Lady Gaga')"
+            >
+              <img src="media/born_this_way.jpeg" class="albumImg" />
+              <p>The Edge of Glory Lady Gaga</p>
+            </div>
+            <button
+              class="favorite"
+              onclick="addFavorite('song1.mp3','The Edge of Glory')"
+            ></button>
+          </div>
 
-            let audio = document.getElementById("audioPlayer");
-            let songLabel = document.getElementById("songName");
-            let volumeSlider = document.getElementById("volumeSlider");
-            let favoritesList = document.getElementById("favoritesList");
+          <div class="albumBox">
+            <div
+              class="songBox"
+              onclick="playAlbum('./songs/Afgan K.mp3', 'Afgan K - Yeico X Toni')"
+            >
+              <img src="media/afgan_k.jpeg" class="albumImg" />
+              <p>Afgan K <br />Yeico X Toni</p>
+            </div>
+            <button
+              class="favorite"
+              onclick="addFavorite('song2.mp3','Afgan K')"
+            ></button>
+          </div>
 
-            let currentSong = "";
-            let currentSongName = "";
+          <div class="albumBox">
+            <div
+              class="songBox"
+              onclick="playAlbum('./songs/CARIÑITO- RODOLFO AICARDI.mp3', 'Cariñito - Rodolfo Aicardi')"
+            >
+              <img src="media/rodolfo.jpeg" class="albumImg" />
+              <p>Cariñito <br />Rodolfo Aicardi</p>
+            </div>
+            <button
+              class="favorite"
+              onclick="addFavorite('song3.mp3','Cariñito')"
+            ></button>
+          </div>
+        </div>
+      </div>
 
-            function addFavorite(songFile, songName) {
+      <div id="playerBar">
+        <button onclick="playPrev()">⏮</button>
+        <button onclick="togglePlay()">⏯</button>
+        <button onclick="playNext()">⏭</button>
 
-                let items = favoritesList.getElementsByTagName("li");
-                for (let i = 0; i < items.length; i++) {
-                    if (items[i].dataset.file === songFile) {
-                        return; 
-                    }
-                }
+        <input
+          id="volumeSlider"
+          type="range"
+          min="0"
+          max="1"
+          step="0.01"
+          value="1"
+        />
 
-                let item = document.createElement("li");
-                item.textContent = songName;
-                
-                item.dataset.file = songFile;
-                item.style.cursor = "pointer";
+        <span id="songName">No song playing</span>
+      </div>
+      <audio id="audioPlayer"></audio>
+    </div>
 
-                item.onclick = function() {
-                    playAlbum(songFile, songName);
-                };
+    <script>
+      let audio = document.getElementById("audioPlayer");
+      let songLabel = document.getElementById("songName");
+      let volumeSlider = document.getElementById("volumeSlider");
+      let favoritesList = document.getElementById("favoritesList");
 
-                let removeBtn = document.createElement("button");
-                removeBtn.textContent = "🗑️";
-                removeBtn.style.marginLeft = "10px";
-                removeBtn.style.border = "none"
-                removeBtn.style.background = "transparent";
-                removeBtn.style.cursor = "pointer";
+      let currentSong = "";
+      let currentSongName = "";
 
-                removeBtn.onclick = function(event) {
-                    event.stopPropagation(); 
-                    favoritesList.removeChild(item);
-                };
+      function addFavorite(songFile, songName) {
+        let items = favoritesList.getElementsByTagName("li");
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].dataset.file === songFile) {
+            return;
+          }
+        }
 
-                item.appendChild(removeBtn);
+        let item = document.createElement("li");
+        item.textContent = songName;
 
-                favoritesList.appendChild(item);
-            }
+        item.dataset.file = songFile;
+        item.style.cursor = "pointer";
 
-            function playAlbum(songFile, title) {
-                currentSong = songFile;
-                currentSongName = title;
+        item.onclick = function () {
+          playAlbum(songFile, songName);
+        };
 
-                audio.src = songFile;
-                audio.play();
+        let removeBtn = document.createElement("button");
+        removeBtn.textContent = "🗑️";
+        removeBtn.style.marginLeft = "10px";
+        removeBtn.style.border = "none";
+        removeBtn.style.background = "transparent";
+        removeBtn.style.cursor = "pointer";
 
-                songLabel.textContent = "Playing: " + title;
-            }
+        removeBtn.onclick = function (event) {
+          event.stopPropagation();
+          favoritesList.removeChild(item);
+        };
 
-            function togglePlay() {
-                if (audio.paused) {
-                    audio.play();
-                } else {
-                    audio.pause();
-                }
-            }
+        item.appendChild(removeBtn);
 
-            function playNext() {
-                audio.currentTime = 0;
-                audio.play();
-            }
+        favoritesList.appendChild(item);
+      }
 
-            function playPrev() {
-                audio.currentTime = 0;
-                audio.play();
-            }
+      function playAlbum(songFile, title) {
+        currentSong = songFile;
+        currentSongName = title;
 
-            volumeSlider.addEventListener("input", function() {
-                audio.volume = volumeSlider.value;
-            });
+        audio.src = songFile;
+        audio.play();
 
+        songLabel.textContent = "Playing: " + title;
+      }
 
-        </script>
-    
-    </body>
+      function togglePlay() {
+        if (audio.paused) {
+          audio.play();
+        } else {
+          audio.pause();
+        }
+      }
+
+      function playNext() {
+        audio.currentTime = 0;
+        audio.play();
+      }
+
+      function playPrev() {
+        audio.currentTime = 0;
+        audio.play();
+      }
+
+      volumeSlider.addEventListener("input", function () {
+        audio.volume = volumeSlider.value;
+      });
+
+      function sendSongInfo(songFile, title, isPlaying) {
+        window.parent.postMessage(
+          {
+            type: "music",
+            action: "songChange",
+            songFile: songFile,
+            title: title,
+            isPlaying: isPlaying,
+          },
+          "*"
+        );
+      }
+
+      function sendPlayState(isPlaying) {
+        window.parent.postMessage(
+          {
+            type: "music",
+            action: "playState",
+            isPlaying: isPlaying,
+          },
+          "*"
+        );
+      }
+
+      function playAlbum(songFile, title) {
+        currentSong = songFile;
+        currentSongName = title;
+
+        audio.src = songFile;
+        audio.play();
+
+        songLabel.textContent = "Playing: " + title;
+
+        sendSongInfo(songFile, title, true);
+      }
+
+      function togglePlay() {
+        if (audio.paused) {
+          audio.play();
+          sendPlayState(true);
+        } else {
+          audio.pause();
+          sendPlayState(false);
+        }
+      }
+
+      window.addEventListener("message", function (event) {
+        if (event.data.type === "music") {
+          if (event.data.action === "togglePlay") {
+            togglePlay();
+          } else if (event.data.action === "play") {
+            audio.play();
+            sendPlayState(true);
+          } else if (event.data.action === "pause") {
+            audio.pause();
+            sendPlayState(false);
+          }
+        }
+      });
+
+      audio.addEventListener("ended", function () {
+        sendPlayState(false);
+      });
+    </script>
+  </body>
 </html>
