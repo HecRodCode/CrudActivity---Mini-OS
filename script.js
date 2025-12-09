@@ -2,8 +2,15 @@ class WebOSNova {
   constructor() {
     this.init();
     this.quickSettingsVisible = false;
+    this.currentSong = null;
     this.musicPlaying = false;
     this.initQuickSettings();
+
+    window.addEventListener("message", (event) => {
+      if (event.data.type === "music") {
+        this.handleMusicMessage(event.data);
+      }
+    });
   }
 
   /* Inicialización del sistema */
@@ -106,6 +113,42 @@ class WebOSNova {
       error: "exclamation-circle",
     };
     return icons[type] || "info-circle";
+  }
+
+  handleMusicMessage(data) {
+    if (data.action === "songChange") {
+      this.currentSong = {
+        file: data.songFile,
+        title: data.title,
+      };
+      this.updateMusicPanel(data.title, data.isPlaying);
+    } else if (data.action === "playState") {
+      this.musicPlaying = data.isPlaying;
+      this.updateMusicPanel(
+        this.currentSong ? this.currentSong.title : null,
+        data.isPlaying
+      );
+    }
+  }
+
+  updateMusicPanel(title, isPlaying) {
+    const musicTitle = document.querySelector(".music-info h4");
+    const musicArtist = document.querySelector(".music-artist");
+    const playIcon = document.getElementById("play-icon");
+
+    if (title) {
+      const parts = title.split(" - ");
+      musicTitle.textContent = parts[0] || title;
+      musicArtist.textContent = parts[1] || "";
+    }
+
+    if (isPlaying) {
+      playIcon.className = "fas fa-pause";
+    } else {
+      playIcon.className = "fas fa-play";
+    }
+
+    this.musicPlaying = isPlaying;
   }
 
   /* Event Listeners del sistema */
@@ -445,22 +488,40 @@ class WebOSNova {
     }
   }
 
-  /* Control de música */
   togglePlay() {
-    const playIcon = document.getElementById("play-icon");
-    this.musicPlaying = !this.musicPlaying;
+    const iframe = document.getElementById("ventana-app");
 
-    if (this.musicPlaying) {
-      playIcon.className = "fas fa-pause";
-      this.showNotification("Reproduciendo: The Edge Of Glory", "success");
+    if (iframe && iframe.src.includes("music.html") && iframe.contentWindow) {
+      try {
+        iframe.contentWindow.togglePlay();
+      } catch (e) {
+        const playIcon = document.getElementById("play-icon");
+        this.musicPlaying = !this.musicPlaying;
+
+        if (this.musicPlaying) {
+          playIcon.className = "fas fa-pause";
+          this.showNotification("Reproduciendo: The Edge Of Glory", "success");
+        } else {
+          playIcon.className = "fas fa-play";
+          this.showNotification("Música en pausa", "info");
+        }
+      }
     } else {
-      playIcon.className = "fas fa-play";
-      this.showNotification("Música en pausa", "info");
+      const playIcon = document.getElementById("play-icon");
+      this.musicPlaying = !this.musicPlaying;
+
+      if (this.musicPlaying) {
+        playIcon.className = "fas fa-pause";
+        this.showNotification("Reproduciendo: The Edge Of Glory", "success");
+      } else {
+        playIcon.className = "fas fa-play";
+        this.showNotification("Música en pausa", "info");
+      }
     }
   }
 
   openMusicApp() {
-    abrirApp("apps/musica.html", "Reproductor de Música");
+    abrirApp("apps/musica/music.html", "Reproductor de Música");
     this.hideQuickSettings();
   }
 }
@@ -511,6 +572,12 @@ function abrirApp(url, titulo) {
   iframe.src = url;
   webOS.updateWindowTitle(titulo);
 
+  if (url.includes("calculator")) {
+    setTimeout(() => {
+      ajustarVentanaCalculadora();
+    }, 100);
+  }
+
   iframe.style.opacity = "0";
 
   setTimeout(() => {
@@ -522,7 +589,53 @@ function abrirApp(url, titulo) {
   webOS.showNotification(`Aplicación "${titulo}" abierta`, "success");
 }
 
-/* Funciones de utilidad del sistema */
+function ajustarVentanaCalculadora() {
+  const container = document.querySelector(".app-window-container");
+  const iframe = document.getElementById("ventana-app");
+
+  if (!window.originalWindowStyle) {
+    window.originalWindowStyle = {
+      width: container.style.width,
+      height: container.style.height,
+      top: container.style.top,
+      left: container.style.left,
+      transform: container.style.transform,
+      borderRadius: container.style.borderRadius,
+    };
+  }
+
+  // Ajustes para la calculadora
+  container.style.width = "395px";
+  container.style.height = "580px";
+  container.style.top = "50px";
+  container.style.left = "500px";
+  container.style.transform = "none";
+  container.style.borderRadius = "16px";
+
+  iframe.style.width = "100%";
+  iframe.style.height = "100%";
+}
+
+function restaurarEstiloVentana() {
+  const container = document.querySelector(".app-window-container");
+
+  if (window.originalWindowStyle) {
+    container.style.width = window.originalWindowStyle.width;
+    container.style.height = window.originalWindowStyle.height;
+    container.style.top = window.originalWindowStyle.top;
+    container.style.left = window.originalWindowStyle.left;
+    container.style.transform = window.originalWindowStyle.transform;
+    container.style.borderRadius = window.originalWindowStyle.borderRadius;
+  } else {
+    container.style.width = "90%";
+    container.style.height = "75vh";
+    container.style.top = "50px";
+    container.style.left = "50%";
+    container.style.transform = "translateX(-50%)";
+    container.style.borderRadius = "16px";
+  }
+}
+
 function actualizarTitulo(titulo) {
   document.getElementById("window-title").textContent = titulo;
 }
