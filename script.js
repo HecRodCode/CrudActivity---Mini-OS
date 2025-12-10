@@ -724,10 +724,39 @@ function openMusicApp() {
   if (webOS) webOS.openMusicApp();
 }
 
+window.addEventListener("message", function (event) {
+  if (event.data.type === "CAMBIAR_FONDO") {
+    console.log("Cambiando fondo del escritorio a:", event.data.fondo);
+    
+    document.body.style.backgroundImage = event.data.fondo;
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundPosition = "center center";
+    document.body.style.backgroundAttachment = "fixed";
+    document.body.style.backgroundSize = "cover";
+    
+    localStorage.setItem('wallpaper', event.data.fondo);
+  }
+});
+
 /* Inicialización del sistema */
 let webOS;
 document.addEventListener("DOMContentLoaded", () => {
   webOS = new WebOSNova();
+
+  document.body.style.opacity = "0";
+  setTimeout(() => {
+    document.body.style.transition = "opacity 0.5s ease";
+    document.body.style.opacity = "1";
+  }, 100);
+
+  const savedWallpaper = localStorage.getItem("wallpaper");
+  if (savedWallpaper) {
+    document.body.style.backgroundImage = savedWallpaper;
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundPosition = "center center";
+    document.body.style.backgroundAttachment = "fixed";
+    document.body.style.backgroundSize = "cover";
+  }
 
   document.body.style.opacity = "0";
   setTimeout(() => {
