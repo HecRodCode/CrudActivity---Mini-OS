@@ -27,91 +27,116 @@ Su diseño combina un estilo moderno, animaciones suaves y una estructura modula
 
 ## 📁 Estructura del proyecto
 
-    /Apps
-    │
-    ├── /calculator
-    │     ├── calculator.html
-    │     └── cal_styles.css
-    │
-    ├── /doom
-    │     └── doom.html
-    │
-    ├── /galery
-    │     ├── image_gallery.html
-    │     ├── style_image.css
-    │     ├── 1-1.svg
-    │     ├── 2-2.svg
-    │     ├── 3-3.svg
-    │     ├── 4-4.svg
-    │     └── 5-5.svg
-    │
-    ├── /music
-    │     ├── music.html
-    │     ├── music_styles.css
-    │     ├── afgan_k.jpeg
-    │     ├── born_this_way.jpeg
-    │     ├── empty_like.png
-    │     ├── filled_like.png
-    │     ├── rodolfo.jpeg
-    │
-    ├── /navegador
-    │     ├── navegador.html
-    │     ├── navegador.css
-    │     └── navegador.js
-    │
-    └── /notas
-          ├── notita.html
-          ├── notas.css
-          └── notas.js
+      /Apps
+      │
+      ├── /bienvenida
+      │     ├── bienvenida.html
+      │     └── bienvenida.css
+      │
+      ├── /calculator
+      │     ├── calculator.html
+      │     └── cal_styles.css
+      │
+      ├── /configuracion
+      │     ├── configuracion.html
+      │     ├── configuracion.css
+      │     └── configuracion.js
+      │
+      ├── /doom
+      │     └── doom.html
+      │
+      ├── /galery
+      │     ├── image_gallery.html
+      │     ├── style_image.css
+      │     ├── 1-1.svg
+      │     ├── 2-2.svg
+      │     ├── 3-3.svg
+      │     ├── 4-4.svg
+      │     └── 5-5.svg
+      │
+      ├── /juegos
+      │     ├── juegos.html
+      │     └── juegos.css
+      │
+      ├── /music
+      │     ├── music.html
+      │     ├── music_styles.css
+      │     ├── afgan_k.jpeg
+      │     ├── born_this_way.jpeg
+      │     ├── empty_like.png
+      │     ├── filled_like.png
+      │     ├── rodolfo.jpeg
+      │     │
+      │     └── /songs
+      │           ├── afgan K.mp3
+      │           ├── CARIÑITO-RODOLFO AICARDI.mp3
+      │           ├── Lady Gaga - The Edge Of Glory.mp3
+      │           └── (otros audios si se agregan)
+      │
+      ├── /navegador
+      │     ├── navegador.html
+      │     ├── navegador.css
+      │     └── navegador.js
+      │
+      └── /notas
+            ├── notita.html
+            ├── notas.css
+            └── notas.js
 
-    /assets
-    │
-    └── /media
-          ├── apple-logo.svg
-          ├── doom.png
-          └── wallpaper.jpg
+      /assets   
+      │
+      └── /media
+            ├── apple-logo.svg
+            ├── doom.png
+            └── wallpaper.jpg
 
-    /styles
-    │
-    └── control-panel.css
+      /styles 
+      │
+      └── control-panel.css
 
-    index.html
-    styles.css
-    script.js
-    README.md
+      index.html 
+      styles.css
+      script.js
+      README.md
 
 ---
 
 ## 📦 Aplicaciones disponibles
 
-| Aplicación                | Archivos                                                                                     | Funciones                                                                           | Descripción                                                                                                                 |
-| ------------------------- | -------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| **Calculadora**           | Apps/calculator/calculator.html<br>Apps/calculator/cal_styles.css                            | - Suma, resta, multiplicación y división<br>- Números decimales<br>- Borrar display | Herramienta básica del sistema para realizar operaciones rápidas con una interfaz clara y práctica.                         |
-| **Doom (mini-juego)**     | Apps/doom/doom.html                                                                          | - Reproducir juego DOOM embebido                                                    | Aplicación recreativa del sistema, pensada para ofrecer una experiencia retro directamente en el escritorio web.            |
-| **Galería de Imágenes**   | Apps/galery/image_gallery.html<br>Apps/galery/style_image.css<br>(+ imágenes .svg)           | - Visualización de imágenes<br>- Ajuste de zoom<br>- Diseño tipo macOS              | Vista moderna y organizada de las imágenes del sistema, con interfaz limpia y navegación fluida tipo biblioteca multimedia. |
-| **Reproductor de Música** | Apps/music/music.html<br>Apps/music/music_styles.css<br>(+ imágenes de carátulas)            | - Reproducción de audio<br>- Botón de “like” interactivo<br>- Cambio de canciones   | Aplicación multimedia que permite escuchar música con una interfaz amigable y visualmente atractiva.                        |
-| **Navegador Web**         | Apps/navegador/navegador.html<br>Apps/navegador/navegador.css<br>Apps/navegador/navegador.js | - Barra de navegación<br>- Carga de sitios integrados<br>- Interfaz simulada        | Navegador simulado que replica funciones básicas para navegar dentro del entorno del sistema.                               |
-| **Block de Notas**        | Apps/notas/notita.html<br>Apps/notas/notas.css<br>Apps/notas/notas.js                        | - Escribir y guardar notas (localStorage)<br>- Editor simple                        | Aplicación ligera para tomar notas rápidas dentro del sistema, ideal para ideas o recordatorios.                            |
+| Aplicación                 | Archivos                                                                                                             | Funciones                                                                                | Descripción                                                                                                               |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| **Bienvenida**             | Apps/bienvenida/bienvenida.html<br>Apps/bienvenida/bienvenida.css                                                    | - Vista inicial del sistema<br>- Enlaces a todas las aplicaciones                        | Pantalla inicial del Mini OS que actúa como hub central, mostrando accesos rápidos a cada aplicación instalada.           |
+| **Configuración**          | Apps/configuracion/configuracion.html<br>Apps/configuracion/configuracion.css<br>Apps/configuracion/configuracion.js | - Cambiar fondo del Mini OS<br>- Ajustes gráficos<br>- Controles interactivos            | Centro de control del sistema donde el usuario puede personalizar la apariencia del Mini OS, incluyendo wallpaper.        |
+| **Centro de Juegos**       | Apps/juegos/juegos.html<br>Apps/juegos/juegos.css                                                                    | - Lanzador de juegos integrados<br>- Interfaz de selección visual                        | Menú que organiza los diferentes juegos retro disponibles, permitiendo abrirlos fácilmente desde una misma ventana.       |
+| **Calculadora**            | Apps/calculator/calculator.html<br>Apps/calculator/cal_styles.css                                                    | - Suma, resta, multiplicación y división<br>- Decimales<br>- Borrar display              | Herramienta básica del sistema para operaciones rápidas con una interfaz clara y sencilla.                                |
+| **Doom (mini-juego)**      | Apps/doom/doom.html                                                                                                  | - Ejecutar DOOM clásico embebido                                                         | Juego retro icónico disponible directamente desde la ventana del Mini OS.                                                 |
+| **Galería de Imágenes**    | Apps/galery/image_gallery.html<br>Apps/galery/style_image.css<br>(+ imágenes .svg)                                   | - Visualización de imágenes<br>- Zoom<br>- Diseño macOS                                  | Galería visual elegante con imágenes organizadas tipo biblioteca multimedia.                                              |
+| **Reproductor de Música**  | Apps/music/music.html<br>Apps/music/music_styles.css<br>Apps/music/songs/(*.mp3)                                     | - Reproducción de canciones<br>- Like interactivo<br>- Lista de temas                    | Un reproductor sencillo y atractivo que permite escuchar música del sistema (incluye carpeta *songs* con pistas en .mp3). |
+| **Navegador Web Simulado** | Apps/navegador/navegador.html<br>Apps/navegador/navegador.css<br>Apps/navegador/navegador.js                         | - Barra de URL<br>- Navegación interna<br>- Interfaz visual del navegador                | Navegador simulado que permite explorar contenido predefinido dentro del Mini OS.                                         |
+| **Block de Notas**         | Apps/notas/notita.html<br>Apps/notas/notas.css<br>Apps/notas/notas.js                                                | - Escribir y guardar notas (localStorage)<br>- Editor básico                             | Bloc de notas simple para apuntes rápidos dentro del Mini OS.                                                             |
+| **Juegos Retro** (iframe)  | Apps/juegos/*(integrados)*                                                                                           | - Minecraft Classic<br>- Tetris<br>- Pac-Man<br>- Snake<br>- Space Invaders<br>- Ajedrez | Colección de juegos clásicos incrustados mediante iframes, accesibles desde el menú de juegos.                            |
 
-## 🧩 Features principales 
 
-### 🎛️ Sistema de escritorio
+# 🧩 Features principales 
 
-- Escritorio con iconos interactivos.
-- Fondo personalizable (wallpaper).
-- Organización visual tipo macOS.
+## 🎛️ Sistema de escritorio
 
-### 🌐 Barra superior
+- Escritorio con íconos interactivos al estilo macOS.
+- Ventana de bienvenida al iniciar, mostrando las apps disponibles.
+- Fondo personalizable desde la app de Configuración.
+- Organización visual limpia tipo macOS.
+
+## 🌐 Barra superior
 
 - Ícono estilo Apple con menú desplegable.
-- Menús de navegación: Finder, Archivo, Editar, Ver, Ir, Ventana, Ayuda.
+- Menús: Finder, Archivo, Editar, Ver, Ir, Ventana, Ayuda.
 - Indicadores de estado: Wi-Fi, volumen, batería.
 - Reloj en tiempo real (hora y fecha).
 - Panel de usuario.
 
-### ⚙️ Centro de Control (Control Center)
+## ⚙️ Centro de Control (Control Center)
 
-- Incluye switches funcionales y estilos animados:
+Incluye controles funcionales y animados:
 - Wi-Fi (toggle)
 - Bluetooth (toggle)
 - AirDrop (toggle)
@@ -119,46 +144,52 @@ Su diseño combina un estilo moderno, animaciones suaves y una estructura modula
 - Stage Manager
 - Screen Mirroring
 
-### 💡 Controles de hardware (sliders)
+## 💡 Controles de hardware
 
-- Control de brillo de pantalla.
-- Control de volumen.
-- Indicadores visuales actualizados en tiempo real.
+- Brillo de pantalla (slider)
+- Volumen (slider)
+- Indicadores visuales en tiempo real.
 
-### 🎵 Mini reproductor dentro del Control Center
+## 🎵 Mini reproductor dentro del Control Center
 
 - Vista previa de música.
 - Play/Pause funcional.
 - Información de la canción.
 
-### 🪟 Sistema de ventanas
+## 🪟 Sistema de ventanas avanzado
 
-Ventana principal con:
+- Sistema basado en iframes (todas las apps se cargan dentro de la ventana principal).
+- Botones: cerrar, minimizar, maximizar.
+- Cambio dinámico del título según la app abierta.
+- Restauración de ventanas desde el Dock.
+- Animaciones fluidas estilo macOS.
 
-- Botón cerrar
-- Minimizar
-- Maximizar
-- Cambio dinámico del título según la app.
-- Visualización de apps dentro de un <iframe>.
-- Restauración de ventanas desde el dock.
+## 🧭 Dock de aplicaciones (estilo macOS)
 
-### 🧭 Dock de aplicaciones (estilo macOS)
-
-- Íconos interactivos con hover “zoom”.
-- Separadores estilo macOS.
+- Íconos con hover “zoom” (efecto muelle).
+- Separadores visuales.
 - Icono para restaurar ventanas.
-- Papelera.
-- Sistema de notificaciones
-- Notificación de bienvenida animada.
-- Botón para cerrarla.
+- Papelera funcional.
+- Notificaciones animadas, incluyendo la notificación de bienvenida.
 
-### 🖼️ Apps integradas (Mini OS Apps)
+## 🖼️ Apps integradas (Mini OS Apps)
 
-- Calculadora
-- Bloc de Notas
-- Galería de imágenes
-- Reproductor de Música
-- Navegador Web (simulado)
-- DOOM (icono y launcher)
-- Juegos (app base)
-- Configuración
+### 📌 Apps clásicas
+Calculadora
+Bloc de Notas
+Galería de Imágenes
+Reproductor de Música
+Navegador Web (simulado)
+DOOM (juego embebido)
+
+🆕 Apps nuevas
+- Bienvenida → Muestra las apps disponibles del Mini OS.
+- Configuración → Cambiar fondo de pantalla y ajustes visuales.
+- Juegos → Menú interactivo con enlaces a:
+      - Minecraft Classic
+      - Tetris
+      - DOOM
+      - Pac-Man
+      - Ajedrez
+      - Space Invaders
+      - Snake
